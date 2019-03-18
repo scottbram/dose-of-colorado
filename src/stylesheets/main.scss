@@ -1,3 +1,8 @@
-/** main.scss */
+// main.scss
+/** 
+ * All the imports
+ */
 
-/** All the imports */
+@import "globals/html"
+@import "globals/typography"
+@import "components/buttons"
