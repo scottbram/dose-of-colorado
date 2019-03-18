@@ -1,5 +1,1 @@
-# Treat what ails you
-
------
-Treatments beginning very soon.
------
+# Treat what ails ya
