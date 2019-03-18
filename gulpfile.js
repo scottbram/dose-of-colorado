@@ -15,11 +15,6 @@ var gulp = require('gulp'),
 		'js': 'dist/js'
 	};
 
-// Default task
-// gulp.task('default', ['build-styles', 'build-js']);
-gulp.task('default', gulp.parallel('build-styles', 'build-js'));
-
-
 // Process Sass files
 gulp.task('build-styles', function () {
     return gulp.src(input.styles)
@@ -48,3 +43,7 @@ gulp.task('build-js', function () {
         // .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.js));
 });
+
+// Default task
+// gulp.task('default', ['build-styles', 'build-js']);
+gulp.task('default', gulp.parallel('build-styles', 'build-js'));
