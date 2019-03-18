@@ -45,4 +45,4 @@ gulp.task('build-js', function() {
     gulp.start(['sass', 'js']);
 });*/
 
-gulp.task('default', ['build-styles', 'build-js']);
+gulp.task('build', ['build-styles', 'build-js']);
