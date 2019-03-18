@@ -16,10 +16,10 @@ var gulp = require('gulp'),
 	};
 
 // Default task
-gulp.task('build', ['build-styles', 'build-js']);
+gulp.task('default', ['build-styles', 'build-js']);
 
 // Process Sass files
-gulp.task('build-styles', () => {
+gulp.task('build-styles', function () {
     return gulp.src(input.styles)
     	.pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}))
@@ -29,7 +29,7 @@ gulp.task('build-styles', () => {
 });
 
 // Process JS files
-gulp.task('build-js', () => {
+gulp.task('build-js', function () {
     return gulp.src(input.js)
     	.pipe(sourcemaps.init())
         .pipe(concat('main.js'))
