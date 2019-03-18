@@ -11,18 +11,27 @@ var gulp = require('gulp'),
 		'js': 'src/js/**/*.js'
 	},
 	output = {
-	  'styles': 'dist/styles',
-	  'js': 'dist/js'
+		'styles': 'dist/styles',
+		'js': 'dist/js'
 	};
 
 // Default task
-gulp.task('default', ['build-styles', 'build-js']);
+// gulp.task('default', ['build-styles', 'build-js']);
+gulp.task('default', gulp.parallel('build-styles', 'build-js'));
+
 
 // Process Sass files
 gulp.task('build-styles', function () {
     return gulp.src(input.styles)
     	// .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compressed'}))
+    	// .pipe(sass())
+    	// OR
+        .pipe(sass({
+        	errorLogToConsole: true,
+        	outputStyle: 'compressed'
+        }))
+        // .on('error', console.error.bind(console))
+        // OR
         // .pipe(sass().on('error', sass.logError))
         // .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.styles));
