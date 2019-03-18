@@ -21,21 +21,21 @@ gulp.task('default', ['build-styles', 'build-js']);
 // Process Sass files
 gulp.task('build-styles', function () {
     return gulp.src(input.styles)
-    	.pipe(sourcemaps.init())
+    	// .pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}))
-        .pipe(sass().on('error', sass.logError))
-        .pipe(sourcemaps.write())
+        // .pipe(sass().on('error', sass.logError))
+        // .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.styles));
 });
 
 // Process JS files
 gulp.task('build-js', function () {
     return gulp.src(input.js)
-    	.pipe(sourcemaps.init())
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest(output.js))
-        .pipe(rename('main.min.js'))
-        .pipe(uglify())
-        .pipe(sourcemaps.write())
+    	// .pipe(sourcemaps.init())
+        // .pipe(concat('main.js'))
+        // .pipe(gulp.dest(output.js))
+        // .pipe(rename('main.min.js'))
+        // .pipe(uglify())
+        // .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.js));
 });
