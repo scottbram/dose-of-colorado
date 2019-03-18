@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/thatbram/dose-of-colorado.git"
   },
-  "author": "Scott Bram",
+  "author": "Scott Bram <scottbram@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/thatbram/dose-of-colorado/issues"

@@ -19,7 +19,7 @@ var gulp = require('gulp'),
 gulp.task('build', ['build-styles', 'build-js']);
 
 // Process Sass files
-gulp.task('build-styles', function () {
+gulp.task('build-styles', () => {
     return gulp.src(input.styles)
     	.pipe(sourcemaps.init())
         .pipe(sass({outputStyle: 'compressed'}))
@@ -29,7 +29,7 @@ gulp.task('build-styles', function () {
 });
 
 // Process JS files
-gulp.task('build-js', function() {
+gulp.task('build-js', () => {
     return gulp.src(input.js)
     	.pipe(sourcemaps.init())
         .pipe(concat('main.js'))
