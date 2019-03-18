@@ -29,10 +29,10 @@ gulp.task('js', function() {
 });
 
 // Default task
-/*gulp.task('default', function () {
+gulp.task('default', function () {
     gulp.start(['sass', 'js']);
-});*/
+});
 
 // exports.default = default;
 
-gulp.task('default', ['sass', 'js']);
+// gulp.task('default', ['sass', 'js']);
