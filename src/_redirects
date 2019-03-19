@@ -1,3 +1,7 @@
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^my.doseofcolorado.com
-RewriteRule ^(.*)$ /my/$1 [L,NC,QSA]
+# RewriteEngine on
+# RewriteCond %{HTTP_HOST} ^my.doseofcolorado.com
+# RewriteRule ^(.*)$ /my/$1 [L,NC,QSA]
+
+# proxy the request
+# /my/folder/path  https://subdomain.ofmy.site  200
+https://my.doseofcolorado.com /my/ 200
