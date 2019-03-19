@@ -17,7 +17,7 @@ var gulp = require('gulp'),
 
 gulp.task('incl-index', function() {
 	return gulp.src('src/index.html')
-		.pipe(gulp.dest('dist/index.html'));
+		.pipe(gulp.dest('dist'));
 });
 
 /** Process Sass files */
