@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^my.doseofcolorado.com
+RewriteRule ^(.*)$ /my/$1 [L,NC,QSA]
