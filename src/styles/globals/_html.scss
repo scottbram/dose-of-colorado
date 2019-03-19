@@ -7,4 +7,16 @@ body {
 	margin: 0;
 	padding: 0;
 	background: rgb(255, 255, 255);
+
+	&.prelaunch {
+		text-align: center;
+
+		h1 {
+			margin-top: 40vh;
+			font-family: 'Gaegu';
+		}
+		h2 {
+			font-family: 'B612';
+		}
+	}
 }
