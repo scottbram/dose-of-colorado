@@ -1,11 +1,13 @@
 var gulp = require('gulp'),
 	
-	sass 		= require('gulp-sass'),
+	/** Plug-ins */
+	sourcemaps 	= require('gulp-sourcemaps'),
 	concat 		= require('gulp-concat'),
 	rename 		= require('gulp-rename'),
+	sass 		= require('gulp-sass'),
 	terser 		= require('gulp-terser'),
-	sourcemaps 	= require('gulp-sourcemaps'),
 	
+	/** Path objects */
 	input = {
 	 	'styles': 'src/styles/**/*.scss',
 		'js': 'src/js/**/*.js'
@@ -15,7 +17,8 @@ var gulp = require('gulp'),
 		'js': 'dist/js'
 	};
 
-gulp.task('incl-index', function() {
+/** Copy the homepage file */
+gulp.task('incl-index', function () {
 	return gulp.src('src/index.html')
 		.pipe(gulp.dest('dist'));
 });
