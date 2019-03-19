@@ -1,26 +1,30 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
 	
 	/** Plug-ins */
-	sourcemaps 	= require('gulp-sourcemaps'),
 	concat 		= require('gulp-concat'),
+	htmlmin 	= require('gulp-htmlmin'),
 	rename 		= require('gulp-rename'),
 	sass 		= require('gulp-sass'),
+	sourcemaps 	= require('gulp-sourcemaps'),
 	terser 		= require('gulp-terser'),
 	
 	/** Path objects */
 	input = {
+		'html': 'src/*.html',
 	 	'styles': 'src/styles/**/*.scss',
 		'js': 'src/js/**/*.js'
 	},
 	output = {
+		'html': 'dist',
 		'styles': 'dist/styles',
 		'js': 'dist/js'
 	};
 
-/** Copy the homepage file */
-gulp.task('incl-index', function () {
-	return gulp.src('src/index.html')
-		.pipe(gulp.dest('dist'));
+/** Process HTML files */
+gulp.task('build-html', function () {
+	return gulp.src(input.html)
+		.pipe(htmlmin({ collapseWhitespace: true }))
+		.pipe(gulp.dest(output.html));
 });
 
 /** Process Sass files */
@@ -52,4 +56,4 @@ gulp.task('build-js', function () {
 });
 
 /** Default task */
-gulp.task('default', gulp.parallel('incl-index', 'build-styles', 'build-js'));
+gulp.task('default', gulp.parallel('build-html', 'build-styles', 'build-js'));
