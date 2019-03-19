@@ -15,7 +15,7 @@ var gulp = require('gulp'),
 		'js': 'dist/js'
 	};
 
-gulp.task('index', function() {
+gulp.task('incl-index', function() {
 	return gulp.src('src/index.html')
 		.pipe(gulp.dest('dist/index.html'));
 });
@@ -48,4 +48,4 @@ gulp.task('build-js', function () {
 });
 
 /** Default task */
-gulp.task('default', gulp.parallel('build-styles', 'build-js'));
+gulp.task('default', gulp.parallel('incl-index', 'build-styles', 'build-js'));
