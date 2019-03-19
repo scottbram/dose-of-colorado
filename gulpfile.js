@@ -1,9 +1,9 @@
 var gulp = require('gulp'),
-
+	
 	sass 		= require('gulp-sass'),
 	concat 		= require('gulp-concat'),
 	rename 		= require('gulp-rename'),
-	uglify 		= require('gulp-uglify'),
+	terser 		= require('gulp-terser'),
 	sourcemaps 	= require('gulp-sourcemaps'),
 	
 	input = {
@@ -42,7 +42,7 @@ gulp.task('build-js', function () {
         .pipe(concat('main.js'))
         .pipe(gulp.dest(output.js))
         .pipe(rename('main.min.js'))
-        .pipe(uglify())
+        .pipe(terser())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.js));
 });
