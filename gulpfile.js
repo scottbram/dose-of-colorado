@@ -1,4 +1,4 @@
-const gulp = require('gulp'),
+const gulp 		= require('gulp'),
 	
 	/** Plug-ins */
 	concat 		= require('gulp-concat'),
@@ -8,16 +8,20 @@ const gulp = require('gulp'),
 	sourcemaps 	= require('gulp-sourcemaps'),
 	terser 		= require('gulp-terser'),
 	
-	/** Path objects */
+	/** Paths */
+	in_root		= 'src',
+	out_root	= 'dist',
 	input = {
-		'html': 'src/*.html',
-	 	'styles': 'src/styles/**/*.scss',
-		'js': 'src/js/**/*.js'
+		'html': in_root + '/**/*.html',
+	 	'styles': in_root + '/styles/**/*.scss',
+		'js': in_root + '/js/**/*.js',
+		'redir': in_root + '/_redirects'
 	},
 	output = {
-		'html': 'dist',
-		'styles': 'dist/styles',
-		'js': 'dist/js'
+		'html': out_root,
+		'styles': out_root + '/styles',
+		'js': out_root + '/js',
+		'redir': out_root
 	};
 
 /** Process HTML files */
@@ -58,5 +62,11 @@ gulp.task('build-js', function () {
         .pipe(gulp.dest(output.js));
 });
 
+/** Copy _redirect file for subdomains */
+gulp.task('copy_redir', function () {
+	return gulp.src(input.redir)
+		.pipe(gulp.dest(output.redir));
+});
+
 /** Default task */
-gulp.task('default', gulp.parallel('build-html', 'build-styles', 'build-js'));
+gulp.task('default', gulp.parallel('build-html', 'build-styles', 'build-js', 'copy_redir'));

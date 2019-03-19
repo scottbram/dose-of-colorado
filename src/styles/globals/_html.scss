@@ -18,10 +18,10 @@ body {
 			border-top: 100px solid $highlight_color;
 			color: $primary_color;
 			font-family: 'B612';
-			font-size: 2rem;
+			font-size: 1.6rem;
 			font-weight: 700;
 			text-transform: lowercase;
-			letter-spacing: -2px;
+			letter-spacing: -1px;
 
 			span {
 				display: inline-block;
@@ -29,7 +29,6 @@ body {
 				margin: 0 -4px;
 				padding: 0;
 				font-weight: 400;
-				font-size: 2rem;
 			}
 		}
 		
