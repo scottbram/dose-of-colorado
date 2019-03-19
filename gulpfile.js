@@ -23,7 +23,10 @@ const gulp = require('gulp'),
 /** Process HTML files */
 gulp.task('build-html', function () {
 	return gulp.src(input.html)
-		.pipe(htmlmin({ collapseWhitespace: true }))
+		.pipe(htmlmin({
+			collapseWhitespace: true,
+			removeComments: true
+		}))
 		.pipe(gulp.dest(output.html));
 });
 
