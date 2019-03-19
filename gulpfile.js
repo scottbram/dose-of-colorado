@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 	sourcemaps 	= require('gulp-sourcemaps'),
 	
 	input = {
-	 	'styles': ['src/styles/*.scss', 'src/styles/**/*.scss'],
+	 	'styles': 'src/styles/**/*.scss',
 		'js': 'src/js/**/*.js'
 	},
 	output = {
@@ -15,35 +15,37 @@ var gulp = require('gulp'),
 		'js': 'dist/js'
 	};
 
-// Process Sass files
+gulp.task('index', function() {
+	return gulp.src('src/index.html')
+		.pipe(gulp.dest('dist/index.html'));
+});
+
+/** Process Sass files */
 gulp.task('build-styles', function () {
     return gulp.src(input.styles)
-    	// .pipe(sourcemaps.init())
-    	// .pipe(sass())
-    	// OR
-        .pipe(sass({
+    	.pipe(sourcemaps.init())
+    	.pipe(sass({
         	errorLogToConsole: true,
         	outputStyle: 'compressed'
         }))
-        // .on('error', console.error.bind(console))
+        .on('error', console.error.bind(console))
         // OR
         // .pipe(sass().on('error', sass.logError))
-        // .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.styles));
 });
 
-// Process JS files
+/** Process JS files */
 gulp.task('build-js', function () {
     return gulp.src(input.js)
-    	// .pipe(sourcemaps.init())
-        // .pipe(concat('main.js'))
-        // .pipe(gulp.dest(output.js))
-        // .pipe(rename('main.min.js'))
-        // .pipe(uglify())
-        // .pipe(sourcemaps.write())
+    	.pipe(sourcemaps.init())
+        .pipe(concat('main.js'))
+        .pipe(gulp.dest(output.js))
+        .pipe(rename('main.min.js'))
+        .pipe(uglify())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.js));
 });
 
-// Default task
-// gulp.task('default', ['build-styles', 'build-js']);
+/** Default task */
 gulp.task('default', gulp.parallel('build-styles', 'build-js'));

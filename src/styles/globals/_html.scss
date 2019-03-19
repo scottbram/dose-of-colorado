@@ -1,6 +1,10 @@
-// _html.scss
+/** _html.scss */
 /** 
  * Base HTML styles
  */
 
-
+body {
+	margin: 0;
+	padding: 0;
+	background: rgb(255, 255, 255);
+}

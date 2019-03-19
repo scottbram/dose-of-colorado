@@ -1,6 +1,9 @@
-// _buttons.scss
+/** _buttons.scss */
 /** 
  * Button styles
  */
 
-
+button {
+	border: none;
+	border-radius: 2px;
+}
