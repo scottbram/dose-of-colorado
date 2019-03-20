@@ -13,18 +13,21 @@
 		<link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 	</head>
 	<body class="mydoc">
-		<h1><span>My</span> Dose <span>of</span> Colorado</h1>
-		
-		<input type="text" id="mydoc_id_search_field"><button type="button" id="mydoc_id_search_go">Search for DoC's birthplace</button>
+		<div id="skybar" />
+		<div id="maincontent">
+			<h1><span>My</span> Dose <span>of</span> Colorado</h1>
+			
+			<input type="text" id="mydoc_id_search_field" class="form-control"><button type="button" id="mydoc_id_search_go" class="btn btn-primary">Search for DoC's birthplace</button>
 
-		<div id='map' style='width: 400px; height: 300px;'></div>
-		<script>
-			mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
-			var map = new mapboxgl.Map({
-			container: 'map',
-			style: 'mapbox://styles/mapbox/streets-v11'
-			});
-		</script>
+			<div id='map' style='width: 400px; height: 300px;'></div>
+			<script>
+				mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
+				var map = new mapboxgl.Map({
+					container: 'map',
+					style: 'mapbox://styles/mapbox/streets-v11'
+				});
+			</script>
+		</div>
 
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -6,7 +6,6 @@
 body {
 	margin: 0;
 	padding: 0;
-	border-top: 8px solid $highlight_color;
 	background: rgb(255, 255, 255);
 	color: $font_color;
 }
@@ -35,4 +34,8 @@ h2 {
 	color: $secondary_color;
 	font-family: 'Gaegu';
 	font-size: 0.95rem;
+}
+
+input {
+	border-radius: 2px;
 }

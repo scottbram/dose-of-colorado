@@ -1,0 +1,19 @@
+/** _site.scss */
+/** 
+ * Sitewide styles
+ */
+
+#skybar {
+	position: absolute;
+	width: 100vw;
+	height: 8px;
+	background: $highlight_color;
+}
+
+#earthbar {
+	border-top: 8px solid $highlight_color;
+}
+
+#maincontent {
+	width: 80vw;
+}
