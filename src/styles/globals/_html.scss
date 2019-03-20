@@ -6,37 +6,33 @@
 body {
 	margin: 0;
 	padding: 0;
+	border-top: 8px solid $highlight_color;
 	background: rgb(255, 255, 255);
 	color: $font_color;
+}
 
-	&.prelaunch {
-		text-align: center;
+h1 {
+	margin: 0;
+	padding: 16px 0 0;
+	color: $primary_color;
+	font-family: 'B612';
+	font-size: 1.6rem;
+	font-weight: 700;
+	text-transform: lowercase;
+	letter-spacing: -1px;
 
-		h1 {
-			margin: 0 auto;
-			padding: 10vh 0 0;
-			border-top: 100px solid $highlight_color;
-			color: $primary_color;
-			font-family: 'B612';
-			font-size: 1.6rem;
-			font-weight: 700;
-			text-transform: lowercase;
-			letter-spacing: -1px;
-
-			span {
-				display: inline-block;
-				opacity: 0.5;
-				margin: 0 -4px;
-				padding: 0;
-				font-weight: 400;
-			}
-		}
-		
-		h2 {
-			margin: -4px 0 0;
-			color: $secondary_color;
-			font-family: 'Gaegu';
-			font-size: 0.95rem;
-		}
+	span {
+		display: inline-block;
+		opacity: 0.5;
+		margin: 0 -4px;
+		padding: 0;
+		font-weight: 400;
 	}
+}
+
+h2 {
+	margin: 0;
+	color: $secondary_color;
+	font-family: 'Gaegu';
+	font-size: 0.95rem;
 }
