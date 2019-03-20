@@ -3,8 +3,8 @@
  * Prelaunch styles
  */
 
-.prelaunch {
-	border-top-width: 100px;
+body.prelaunch {
+	border-top: 100px solid $highlight_color;
 	text-align: center;
 
 	h1 {

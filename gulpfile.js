@@ -45,7 +45,7 @@ gulp.task('build-styles', function () {
         .on('error', console.error.bind(console))
         // OR
         // .pipe(sass().on('error', sass.logError))
-        .pipe(rename('main.min.css'))
+        .pipe(rename('stew.min.css'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.styles));
 });
@@ -54,9 +54,9 @@ gulp.task('build-styles', function () {
 gulp.task('build-js', function () {
     return gulp.src(input.js)
     	.pipe(sourcemaps.init())
-        .pipe(concat('main.js'))
+        .pipe(concat('stew.js'))
         // .pipe(gulp.dest(output.js))
-        .pipe(rename('main.min.js'))
+        .pipe(rename('stew.min.js'))
         .pipe(terser())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.js));
