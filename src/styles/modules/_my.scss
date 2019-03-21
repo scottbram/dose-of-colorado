@@ -4,7 +4,12 @@
  */
 
 .mydoc {
+	#mydoc_id_search {
+		width: 100%;
+	}
+
 	#mydoc_id_search_field {
+		display: inline-block;
 		margin-top: 8px;
 		margin-right: 8px;
 		width: 112px;
@@ -23,16 +28,18 @@
 }
 
 @media (min-width: 992px) {
-	#mydoc_id_search_field {
-		display: inline-block;
-	}
+	.mydoc {
+		#mydoc_id_search_field {
+			//
+		}
 
-	#mydoc_id_search_go {
-		margin-right: auto;
-		margin-left: auto;
-	}
+		#mydoc_id_search_go {
+			margin-right: auto;
+			margin-left: auto;
+		}
 
-	#mydoc_map {
-		height: 680px;
+		#mydoc_map {
+			height: 680px;
+		}
 	}
 }
