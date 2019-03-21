@@ -4,21 +4,35 @@
  */
 
 .mydoc {
-	input {
-		display: inline-block;
+	#mydoc_id_search_field {
 		margin-top: 8px;
 		margin-right: 8px;
 		width: 112px;
 		text-align: center;
 	}
 
-	button {
+	#mydoc_id_search_go {
 		margin-top: 8px;
 	}
 
 	#mydoc_map {
 		margin-top: 8px;
 		width: 100%;
-		height: 480px;
+		height: 400px;
+	}
+}
+
+@media (min-width: 992px) {
+	#mydoc_id_search_field {
+		display: inline-block;
+	}
+
+	#mydoc_id_search_go {
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	#mydoc_map {
+		height: 680px;
 	}
 }

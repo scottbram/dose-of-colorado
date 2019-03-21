@@ -23,5 +23,11 @@
 
 main {
 	margin: auto;
-	width: 80vw;
+	width: 90vw;
+}
+
+@media (min-width: 992px) {
+	main {
+		width: 80vw;
+	}
 }
