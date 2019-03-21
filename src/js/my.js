@@ -4,7 +4,9 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
 
-var mydoc_map = new mapboxgl.Map({
+var mydoc_map;
+
+mydoc_map = new mapboxgl.Map({
 	container: 'mydoc_map',
 	// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
 	// style: 'mapbox://styles/mapbox/outdoors-v9',
@@ -14,7 +16,7 @@ var mydoc_map = new mapboxgl.Map({
 });
 
 function loadMap () {
-	var mydoc_map = new mapboxgl.Map({
+	mydoc_map = new mapboxgl.Map({
 		container: 'mydoc_map',
 		// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
 		// style: 'mapbox://styles/mapbox/outdoors-v9',
@@ -86,9 +88,10 @@ function findMyDoC () {
 }
 
 $('#mydoc_id_search_go').keypress( function (e) {
-if (e.which === 13) {
-	findMyDoC();
-}
+	if (e.which === 13) {
+		findMyDoC();
+	}
+});
 
 $('#mydoc_id_search_go').click( function () {
 	findMyDoC();
