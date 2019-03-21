@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="en"><head><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>DoC | My Dose of Colorado</title><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"><link rel="stylesheet" href="styles/stew.min.css"><script src="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js"></script><link href="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css" rel="stylesheet"></head><body class="mydoc"><main><h1><span>My</span> Dose <span>of</span> Colorado</h1><h2>Where is the origin of your DoC? Find out here!</h2><div id="mydoc_id_search"><label>Enter a DoC ID</label> <input type="text" id="mydoc_id_search_field" class="form-control" minlength="5" maxlength="8" placeholder="" required> <button type="button" id="mydoc_id_search_go" class="btn btn-primary">Map my DoC</button></div><div id="mydoc_map"></div><script>mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
+				var map = new mapboxgl.Map({
+					container: 'mydoc_map',
+					style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
+					zoom: 6,
+					center: [-105.547222, 39] // Geographic center of Colorado
+				});
+
+				map.on('load', function () {
+					map.addSource('dem', {
+						"type": "raster-dem",
+						"url": "mapbox://mapbox.terrain-rgb"
+					});
+
+					map.addLayer({
+						"id": "hillshading",
+						"source": "dem",
+						"type": "hillshade"
+					}, 'waterway-river-canal-shadow');
+				});</script></main><div id="skybar" class="bars"></div><div id="earthbar" class="bars"></div><script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script><script src="js/stew.min.js"></script></body></html>
