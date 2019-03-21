@@ -4,6 +4,15 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
 
+var mydoc_map = new mapboxgl.Map({
+	container: 'mydoc_map',
+	// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
+	// style: 'mapbox://styles/mapbox/outdoors-v9',
+	style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v',
+	zoom: 6,
+	center: [-105.547222, 39] // Geographic center of Colorado
+});
+
 function loadMap () {
 	var mydoc_map = new mapboxgl.Map({
 		container: 'mydoc_map',
@@ -14,7 +23,7 @@ function loadMap () {
 		center: [-105.547222, 39] // Geographic center of Colorado
 	});
 
-	mydoc_map.on('load', function () {
+	/*mydoc_map.on('load', function () {
 		mydoc_map.addSource('dem', {
 			"type": "raster-dem",
 			"url": "mapbox://mapbox.terrain-rgb"
@@ -25,10 +34,8 @@ function loadMap () {
 			"source": "dem",
 			"type": "hillshade"
 		}, 'waterway-river-canal-shadow');
-	});
+	});*/
 }
-
-loadMap();
 
 var mydoc_id = 0,
 	mydoc_marker,
@@ -46,8 +53,8 @@ $('#mydoc_id_search_field').on('input', function () {
 	}
 });
 
-$('#mydoc_id_search_go').click( function () {
-	
+function findMyDoC () {
+
 	console.log('mydoc_id: ' + mydoc_id);
 
 	if (mydoc_id.toLowerCase() === 'alpha') {
@@ -76,4 +83,13 @@ $('#mydoc_id_search_go').click( function () {
 	} else {
 		loadMap();
 	}
+}
+
+$('#mydoc_id_search_go').keypress( function (e) {
+if (e.which === 13) {
+	findMyDoC();
+}
+
+$('#mydoc_id_search_go').click( function () {
+	findMyDoC();
 }); 
