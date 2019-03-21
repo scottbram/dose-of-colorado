@@ -56,6 +56,7 @@ $('#mydoc_id_search_field').on('input', function () {
 });
 
 function findMyDoC () {
+	loadMap();
 
 	console.log('mydoc_id: ' + mydoc_id);
 
@@ -84,8 +85,10 @@ function findMyDoC () {
 			.addTo(mydoc_map);
 	} else {
 		$('#mydoc_map').append('<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-		
-		loadMap();
+
+		window.setTimeout( function () {
+            $('#mydoc_map .alert').alert('close');
+        }, 4000);
 	}
 }
 
