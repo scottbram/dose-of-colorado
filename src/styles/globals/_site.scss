@@ -3,15 +3,21 @@
  * Sitewide styles
  */
 
-#skybar {
-	position: absolute;
+.bars {
+	position: fixed;
 	width: 100vw;
 	height: 8px;
+	opacity: 0.8;
+}
+
+#skybar {
+	top: 0;
 	background: $highlight_color;
 }
 
 #earthbar {
-	// border-top: 8px solid $highlight_color;
+	bottom: 0;
+	background: $secondary_color;
 }
 
 main {

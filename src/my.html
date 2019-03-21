@@ -13,7 +13,6 @@
 		<link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 	</head>
 	<body class="mydoc">
-		<div id="skybar"></div>
 		<main>
 			<h1><span>My</span> Dose <span>of</span> Colorado</h1>
 			
@@ -23,14 +22,13 @@
 			<input type="text" id="mydoc_id_search_field" class="form-control" minlength="5" maxlength="8" placeholder="" required>
 			<button type="button" id="mydoc_id_search_go" class="btn btn-primary">Map my DoC</button>
 
-			<div id="map"></div>
+			<div id="mydoc_map"></div>
 			<script>
 				mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
 				var map = new mapboxgl.Map({
-					container: 'map',
-					// style: 'mapbox://styles/mapbox/streets-v11'
+					container: 'mydoc_map',
 					style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
-					zoom: 7,
+					zoom: 6,
 					center: [-105.547222, 39] // Geographic center of Colorado
 				});
 
@@ -44,12 +42,13 @@
 						"id": "hillshading",
 						"source": "dem",
 						"type": "hillshade"
-						// insert below waterway-river-canal-shadow;
-						// where hillshading sits in the Mapbox Outdoors style
 					}, 'waterway-river-canal-shadow');
 				});
 			</script>
 		</main>
+
+		<div id="skybar" class="bars"></div>
+		<div id="earthbar" class="bars"></div>
 
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
