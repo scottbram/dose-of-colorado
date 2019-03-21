@@ -5,14 +5,14 @@
 
 body {
 	margin: 0;
-	padding: 0;
+	padding: 16px 0 16px;
 	background: rgb(255, 255, 255);
 	color: $font_color;
 }
 
 h1 {
 	margin: 0;
-	padding: 16px 0 0;
+	padding: 0;
 	color: $primary_color;
 	font-family: 'B612';
 	font-size: 1.6rem;

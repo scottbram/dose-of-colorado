@@ -17,7 +17,8 @@
 	}
 
 	#mydoc_id_search_go {
-		margin-top: 8px;
+		display: block;
+		margin-top: 8px auto 0;
 	}
 
 	#mydoc_map {
@@ -34,8 +35,9 @@
 		}
 
 		#mydoc_id_search_go {
-			margin-right: auto;
-			margin-left: auto;
+			display: inline-block;
+			margin-right: 0;
+			margin-left: 0;
 		}
 
 		#mydoc_map {
