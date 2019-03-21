@@ -24,12 +24,24 @@
 	#mydoc_map {
 		margin-top: 8px;
 		width: 100%;
-		height: 440px;
+		height: 510px;
+
+		.alert {
+			margin: 8px;
+		}
 	}
 }
 
 @media (min-width: 992px) {
 	.mydoc {
+		/** Remove post-launch and activate in _html */
+		h1, h2 {
+			display: inline-block;
+		}
+		h1 {
+			margin: 0 8px 0 0;
+		}
+
 		#mydoc_id_search_field {
 			//
 		}

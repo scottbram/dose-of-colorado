@@ -1,15 +1,32 @@
 /** my.js */
 
-// console.log('my.js');
-
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
 
 var mydoc_map;
 
-mydoc_map = new mapboxgl.Map({
+/*mydoc_map = new mapboxgl.Map({
 	container: 'mydoc_map',
 	// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
 	// style: 'mapbox://styles/mapbox/outdoors-v9',
+	zoom: 6,
+	center: [-105.547222, 39] // Geographic center of Colorado
+});
+
+mydoc_map.on('load', function () {
+	mydoc_map.addSource('dem', {
+		"type": "raster-dem",
+		"url": "mapbox://mapbox.terrain-rgb"
+	});
+
+	mydoc_map.addLayer({
+		"id": "hillshading",
+		"source": "dem",
+		"type": "hillshade"
+	}, 'waterway-river-canal-shadow');
+});*/
+
+mydoc_map = new mapboxgl.Map({
+	container: 'mydoc_map',
 	style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v',
 	zoom: 6,
 	center: [-105.547222, 39] // Geographic center of Colorado
@@ -18,25 +35,10 @@ mydoc_map = new mapboxgl.Map({
 function loadMap () {
 	mydoc_map = new mapboxgl.Map({
 		container: 'mydoc_map',
-		// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
-		// style: 'mapbox://styles/mapbox/outdoors-v9',
 		style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v',
 		zoom: 6,
 		center: [-105.547222, 39] // Geographic center of Colorado
 	});
-
-	/*mydoc_map.on('load', function () {
-		mydoc_map.addSource('dem', {
-			"type": "raster-dem",
-			"url": "mapbox://mapbox.terrain-rgb"
-		});
-
-		mydoc_map.addLayer({
-			"id": "hillshading",
-			"source": "dem",
-			"type": "hillshade"
-		}, 'waterway-river-canal-shadow');
-	});*/
 }
 
 var mydoc_id = 0,
@@ -45,8 +47,6 @@ var mydoc_id = 0,
 
 $('#mydoc_id_search_field').on('input', function () {
 	mydoc_id = $(this).val();
-
-	// console.log(mydoc_id.length);
 
 	if (mydoc_id.length > 4) {
 		$('#mydoc_id_search_go').prop('disabled', false);
@@ -83,6 +83,8 @@ function findMyDoC () {
 			.setHTML('DoC id: alpha')
 			.addTo(mydoc_map);
 	} else {
+		$('#mydoc_map').append('<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+		
 		loadMap();
 	}
 }

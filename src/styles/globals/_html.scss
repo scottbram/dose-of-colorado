@@ -43,3 +43,13 @@ input {
 button {
 	border-radius: $border-radius;
 }
+
+/** For post-launch */
+/*@media (min-width: 992px) {
+	h1, h2 {
+		display: inline-block;
+	}
+	h1 {
+		margin: 0 8px 0 0;
+	}
+}*/

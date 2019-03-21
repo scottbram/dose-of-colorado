@@ -1,0 +1,13 @@
+/** _bstor.scss */
+/** 
+ * Bootstrap targeted overrides
+ */
+
+.btn {
+	vertical-align: baseline; // Aligns it with an adjacent input
+	border-radius: $border-radius;
+}
+
+.alert-dismissible .close {
+	padding: .5rem 1.25rem;
+}
