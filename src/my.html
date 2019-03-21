@@ -17,14 +17,21 @@
 		<main>
 			<h1><span>My</span> Dose <span>of</span> Colorado</h1>
 			
-			<input type="text" id="mydoc_id_search_field" class="form-control"><button type="button" id="mydoc_id_search_go" class="btn btn-primary">Search for DoC's birthplace</button>
+			<h2>Where was your Dose born? Find out here!</h2>
 
-			<div id='map' style='width: 400px; height: 300px;'></div>
+			<label>Enter a DoC ID</label>
+			<input type="text" id="mydoc_id_search_field" class="form-control" minlength="5" maxlength="8" placeholder="Dose ID" required>
+			<button type="button" id="mydoc_id_search_go" class="btn btn-primary">Show my dose origin</button>
+
+			<div id="map"></div>
 			<script>
 				mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
 				var map = new mapboxgl.Map({
 					container: 'map',
-					style: 'mapbox://styles/mapbox/streets-v11'
+					// style: 'mapbox://styles/mapbox/streets-v11'
+					style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
+					zoom: 5,
+					center: [39, -105.547222] // Geographic center of Colorado
 				});
 			</script>
 		</main>

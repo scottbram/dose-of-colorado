@@ -3,4 +3,21 @@
  * My DoC module styles
  */
 
+.mydoc {
+	input {
+		display: inline-block;
+		margin-top: 8px;
+		margin-right: 8px;
+		width: 116px;
+	}
 
+	button {
+		margin-top: 8px;
+	}
+
+	#map {
+		margin-top: 8px;
+		width: 100%;
+		height: 480px;
+	}
+}

@@ -7,3 +7,8 @@ button {
 	border: none;
 	border-radius: 2px;
 }
+
+/** Bootstrap overrides */
+.btn {
+	vertical-align: baseline; // Aligns it with an adjacent input
+}
