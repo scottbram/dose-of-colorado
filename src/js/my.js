@@ -24,7 +24,9 @@ mydoc_map.on('load', function () {
 	}, 'waterway-river-canal-shadow');
 });
 
-var mydoc_id = 0;
+var mydoc_id = 0,
+	mydoc_marker,
+	mydoc_map_popup;
 
 $('#mydoc_id_search_field').on('input', function () {
 	mydoc_id = $(this).val();
@@ -42,26 +44,31 @@ $('#mydoc_id_search_go').click( function () {
 	
 	console.log('mydoc_id: ' + mydoc_id);
 
-	var mydoc_marker = new mapboxgl.Marker().setLngLat([-105.514, 40.130]).addTo(mydoc_map);
+	if (mydoc_id.toLowerCase() === 'alpha') {
+		mydoc_map.setCenter([-105.514, 40.130]);
+		mydoc_map.setZoom(15);
 
-	mydoc_map.setCenter([-105.514, 40.130]);
-	mydoc_map.setZoom(15);
+		mydoc_marker = new mapboxgl.Marker().setLngLat([-105.514, 40.130]).addTo(mydoc_map);
 
-	var markerHeight = 38, markerRadius = 8, linearOffset = 10;
+		var markerHeight = 38, markerRadius = 8, linearOffset = 10;
 
-	var popupOffsets = {
-		'top': [0, 0],
-		'top-left': [0,0],
-		'top-right': [0,0],
-		'bottom': [0, -markerHeight],
-		'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-		'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-		'left': [markerRadius, (markerHeight - markerRadius) * -1],
-		'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-	};
+		var popupOffsets = {
+			'top': [0, 0],
+			'top-left': [0,0],
+			'top-right': [0,0],
+			'bottom': [0, -markerHeight],
+			'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+			'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+			'left': [markerRadius, (markerHeight - markerRadius) * -1],
+			'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+		};
 
-	var mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
-		.setLngLat([-105.514, 40.130])
-		.setHTML('DoC id: alpha')
-		.addTo(mydoc_map);
+		mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
+			.setLngLat([-105.514, 40.130])
+			.setHTML('DoC id: alpha')
+			.addTo(mydoc_map);
+	} else {
+		mydoc_marker.remove();
+		mydoc_map_popup.remove();
+	}
 }); 
