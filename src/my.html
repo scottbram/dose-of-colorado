@@ -24,28 +24,6 @@
 			</div>
 
 			<div id="mydoc_map"></div>
-			<script>
-				mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
-				var map = new mapboxgl.Map({
-					container: 'mydoc_map',
-					style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
-					zoom: 6,
-					center: [-105.547222, 39] // Geographic center of Colorado
-				});
-
-				map.on('load', function () {
-					map.addSource('dem', {
-						"type": "raster-dem",
-						"url": "mapbox://mapbox.terrain-rgb"
-					});
-
-					map.addLayer({
-						"id": "hillshading",
-						"source": "dem",
-						"type": "hillshade"
-					}, 'waterway-river-canal-shadow');
-				});
-			</script>
 		</main>
 
 		<div id="skybar" class="bars"></div>
