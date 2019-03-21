@@ -10,8 +10,8 @@ function loadMap () {
 		// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
 		// style: 'mapbox://styles/mapbox/outdoors-v9',
 		style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v',
-		// zoom: 6,
-		// center: [-105.547222, 39] // Geographic center of Colorado
+		zoom: 6,
+		center: [-105.547222, 39] // Geographic center of Colorado
 	});
 
 	mydoc_map.on('load', function () {
