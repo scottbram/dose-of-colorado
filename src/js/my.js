@@ -3,26 +3,32 @@
 // console.log('my.js');
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
-				
-var mydoc_map = new mapboxgl.Map({
-	container: 'mydoc_map',
-	style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
-	zoom: 6,
-	center: [-105.547222, 39] // Geographic center of Colorado
-});
 
-mydoc_map.on('load', function () {
-	mydoc_map.addSource('dem', {
-		"type": "raster-dem",
-		"url": "mapbox://mapbox.terrain-rgb"
+function loadMap () {
+	var mydoc_map = new mapboxgl.Map({
+		container: 'mydoc_map',
+		// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
+		// style: 'mapbox://styles/mapbox/outdoors-v9',
+		style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v',
+		// zoom: 6,
+		// center: [-105.547222, 39] // Geographic center of Colorado
 	});
 
-	mydoc_map.addLayer({
-		"id": "hillshading",
-		"source": "dem",
-		"type": "hillshade"
-	}, 'waterway-river-canal-shadow');
-});
+	mydoc_map.on('load', function () {
+		mydoc_map.addSource('dem', {
+			"type": "raster-dem",
+			"url": "mapbox://mapbox.terrain-rgb"
+		});
+
+		mydoc_map.addLayer({
+			"id": "hillshading",
+			"source": "dem",
+			"type": "hillshade"
+		}, 'waterway-river-canal-shadow');
+	});
+}
+
+loadMap();
 
 var mydoc_id = 0,
 	mydoc_marker,
@@ -31,7 +37,7 @@ var mydoc_id = 0,
 $('#mydoc_id_search_field').on('input', function () {
 	mydoc_id = $(this).val();
 
-	console.log(mydoc_id.length);
+	// console.log(mydoc_id.length);
 
 	if (mydoc_id.length > 4) {
 		$('#mydoc_id_search_go').prop('disabled', false);
@@ -68,7 +74,6 @@ $('#mydoc_id_search_go').click( function () {
 			.setHTML('DoC id: alpha')
 			.addTo(mydoc_map);
 	} else {
-		mydoc_marker.remove();
-		mydoc_map_popup.remove();
+		loadMap();
 	}
 }); 
