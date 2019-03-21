@@ -17,11 +17,11 @@
 		<main>
 			<h1><span>My</span> Dose <span>of</span> Colorado</h1>
 			
-			<h2>Where was your Dose born? Find out here!</h2>
+			<h2>Where is the origin of your DoC? Find out here!</h2>
 
 			<label>Enter a DoC ID</label>
-			<input type="text" id="mydoc_id_search_field" class="form-control" minlength="5" maxlength="8" placeholder="Dose ID" required>
-			<button type="button" id="mydoc_id_search_go" class="btn btn-primary">Show my dose origin</button>
+			<input type="text" id="mydoc_id_search_field" class="form-control" minlength="5" maxlength="8" placeholder="" required>
+			<button type="button" id="mydoc_id_search_go" class="btn btn-primary">Map my DoC</button>
 
 			<div id="map"></div>
 			<script>
@@ -31,7 +31,22 @@
 					// style: 'mapbox://styles/mapbox/streets-v11'
 					style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
 					zoom: 5,
-					center: [39, -105.547222] // Geographic center of Colorado
+					center: [39.0, -105.547222] // Geographic center of Colorado
+				});
+
+				map.on('load', function () {
+					map.addSource('dem', {
+						"type": "raster-dem",
+						"url": "mapbox://mapbox.terrain-rgb"
+					});
+
+					map.addLayer({
+						"id": "hillshading",
+						"source": "dem",
+						"type": "hillshade"
+						// insert below waterway-river-canal-shadow;
+						// where hillshading sits in the Mapbox Outdoors style
+					}, 'waterway-river-canal-shadow');
 				});
 			</script>
 		</main>
