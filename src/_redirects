@@ -4,4 +4,4 @@
 # proxy the request
 # https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200
 # https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200
-//my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200!
+https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200!
