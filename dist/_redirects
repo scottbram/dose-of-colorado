@@ -1,7 +1,7 @@
-# RewriteEngine on
-# RewriteCond %{HTTP_HOST} ^my.doseofcolorado.com
-# RewriteRule ^(.*)$ /my/$1 [L,NC,QSA]
+# my.doseofcolorado.com
+# dose-of-colorado.netlify.com
 
 # proxy the request
-# /my/folder/path  https://subdomain.ofmy.site  200
-# https://my.doseofcolorado.com 	/my 	200
+# https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200
+# https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200
+//my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200!
