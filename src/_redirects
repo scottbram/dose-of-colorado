@@ -4,4 +4,4 @@
 
 # proxy the request
 # /my/folder/path  https://subdomain.ofmy.site  200
-https://my.doseofcolorado.com 	/my.html 	200
+https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200
