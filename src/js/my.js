@@ -92,8 +92,8 @@ function findMyDoC () {
 	}
 }
 
-$('#mydoc_id_search_go').keypress( function (e) {
-	if (e.which === 13) {
+$('#mydoc_id_search_field').keypress( function (e) {
+	if (e.which === 13) {		
 		findMyDoC();
 	}
 });
