@@ -3,10 +3,17 @@
  * Base HTML styles
  */
 
+html {
+	background-image: url(/assets/photos/james_creek_aspens_1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
 body {
 	margin: 0;
 	padding: 16px 0 16px;
-	background: rgb(255, 255, 255);
+	min-height: 100vh;
+	background: rgba(255, 255, 255, 0.75);
 	color: $font_color;
 }
 
@@ -44,12 +51,16 @@ button {
 	border-radius: $border-radius;
 }
 
-/** For post-launch */
-/*@media (min-width: 992px) {
-	h1, h2 {
+@media (min-width: 992px) {
+	html {
+		background-image: url(/assets/photos/rmnp_pond_and_peaks_1.jpg);
+	}
+
+	/** For post-launch */
+	/*h1, h2 {
 		display: inline-block;
 	}
 	h1 {
 		margin: 0 8px 0 0;
-	}
-}*/
+	}*/
+}
