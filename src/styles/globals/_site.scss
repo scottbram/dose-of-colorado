@@ -21,13 +21,13 @@
 	background: $secondary_color;
 }
 
-main {
+header, main {
 	margin: auto;
 	width: 90vw;
 }
 
 @media (min-width: 992px) {
-	main {
+	header, main {
 		width: 80vw;
 	}
 }
