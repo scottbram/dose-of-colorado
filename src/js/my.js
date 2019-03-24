@@ -79,9 +79,11 @@ function findMyDoC () {
 			'right': [-markerRadius, (markerHeight - markerRadius) * -1]
 		};
 
+		var mydoc_map_popup_template = 'DoC id: alpha';
+
 		mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
 			.setLngLat([-105.514, 40.130])
-			.setHTML('DoC id: alpha')
+			.setHTML(mydoc_map_popup_template)
 			.addTo(mydoc_map);
 	} else {
 		$('#mydoc_map').append('<div class="alert alert-warning alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
