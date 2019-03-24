@@ -7,20 +7,24 @@ const gulp 		= require('gulp'),
 	sass 		= require('gulp-sass'),
 	sourcemaps 	= require('gulp-sourcemaps'),
 	terser 		= require('gulp-terser'),
+	imagemin 	= require('gulp-imagemin'),
 	
 	/** Paths */
 	in_root		= 'src',
 	out_root	= 'dist',
+
 	input = {
 		'html': in_root + '/**/*.html',
 	 	'styles': in_root + '/styles/**/*.scss',
 		'js': in_root + '/js/**/*.js',
+		'images': in_root + '/assets/**/*',
 		'redir': in_root + '/_redirects'
 	},
 	output = {
 		'html': out_root,
 		'styles': out_root + '/styles',
 		'js': out_root + '/js',
+		'images': out_root + '/assets',
 		'redir': out_root
 	};
 
@@ -62,6 +66,19 @@ gulp.task('build-js', function () {
         .pipe(gulp.dest(output.js));
 });
 
+/** Process image files */
+gulp.task('imagemin', function () {
+	return gulp.src(input.images)
+		.pipe(imagemin(
+			[
+				imagemin.jpegtran({
+					progressive: true
+				})
+			]
+		))
+		.pipe(gulp.dest(output.images));
+});
+
 /** Copy _redirect file for subdomains */
 gulp.task('copy_redir', function () {
 	return gulp.src(input.redir)
@@ -69,4 +86,4 @@ gulp.task('copy_redir', function () {
 });
 
 /** Default task */
-gulp.task('default', gulp.parallel('build-html', 'build-styles', 'build-js', 'copy_redir'));
+gulp.task('default', gulp.parallel('build-html', 'build-styles', 'build-js', 'imagemin', 'copy_redir'));
