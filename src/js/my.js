@@ -4,19 +4,15 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsd
 
 var mydoc_map;
 
-if (location.href.indexOf('?') !== -1) {
-	findMyDoC('url');
-}
-
 /*mydoc_map = new mapboxgl.Map({
 	container: 'mydoc_map',
 	// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
 	// style: 'mapbox://styles/mapbox/outdoors-v9',
 	zoom: 6,
 	center: [-105.547222, 39] // Geographic center of Colorado
-});
+});*/
 
-mydoc_map.on('load', function () {
+/*mydoc_map.on('load', function () {
 	mydoc_map.addSource('dem', {
 		"type": "raster-dem",
 		"url": "mapbox://mapbox.terrain-rgb"
@@ -34,6 +30,12 @@ mydoc_map = new mapboxgl.Map({
 	style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v',
 	zoom: 6,
 	center: [-105.547222, 39] // Geographic center of Colorado
+});
+
+mydoc_map.on('load', function () {
+	if (location.href.indexOf('?') !== -1) {
+		findMyDoC('url');
+	}
 });
 
 function loadMap () {
@@ -88,6 +90,8 @@ function findMyDoC (mydoc_source) {
 			console.log('qStr: ' + qStr);
 
 			mydoc_id = qStr;
+
+			$('#mydoc_id_search_field').val(mydoc_id);
 	}
 
 	console.log('mydoc_id: ' + mydoc_id);
