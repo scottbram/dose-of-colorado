@@ -1,29 +1,8 @@
 /** my.js */
 
-mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
-
 var mydoc_map;
 
-/*mydoc_map = new mapboxgl.Map({
-	container: 'mydoc_map',
-	// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
-	// style: 'mapbox://styles/mapbox/outdoors-v9',
-	zoom: 6,
-	center: [-105.547222, 39] // Geographic center of Colorado
-});*/
-
-/*mydoc_map.on('load', function () {
-	mydoc_map.addSource('dem', {
-		"type": "raster-dem",
-		"url": "mapbox://mapbox.terrain-rgb"
-	});
-
-	mydoc_map.addLayer({
-		"id": "hillshading",
-		"source": "dem",
-		"type": "hillshade"
-	}, 'waterway-river-canal-shadow');
-});*/
+mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
 
 mydoc_map = new mapboxgl.Map({
 	container: 'mydoc_map',
@@ -71,8 +50,6 @@ $('#mydoc_id_search_field').on('input', function () {
 function findMyDoC (mydoc_source) {
 	switch (mydoc_source) {
 		case 'user':
-			loadMap();
-			
 			mydoc_id = $('#mydoc_id_search_field').val();
 			mydoc_id = $.trim(mydoc_id);
 		break;
@@ -87,10 +64,17 @@ function findMyDoC (mydoc_source) {
 
 			$('#mydoc_id_search_field').val(mydoc_id);
 	}
-
 	console.log('mydoc_id: ' + mydoc_id);
 
 	if (mydoc_id.toLowerCase() === 'alpha') {
+		switch (mydoc_source) {
+			case 'user':
+				loadMap();
+			break;
+			case 'url':
+				// 
+		}
+		
 		/** Set directly accessible URL */
 		let stateObj = {
 		    mydoc_id: mydoc_id,
