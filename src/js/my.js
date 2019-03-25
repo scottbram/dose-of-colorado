@@ -52,6 +52,7 @@ var mydoc_id = '',
 
 $('#mydoc_id_search_field').on('input', function () {
 	mydoc_id = $(this).val();
+	mydoc_id = $.trim(mydoc_id);
 
 	if (mydoc_id.length > 4) {
 		$('#mydoc_id_search_go').prop('disabled', false);
@@ -64,6 +65,7 @@ function findMyDoC () {
 	loadMap();
 
 	mydoc_id = $('#mydoc_id_search_field').val();
+	mydoc_id = $.trim(mydoc_id);
 
 	console.log('mydoc_id: ' + mydoc_id);
 
