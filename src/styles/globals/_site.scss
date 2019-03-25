@@ -35,7 +35,11 @@ main {
 }
 
 @media (min-width: 992px) {
-	header, main {
-		padding: 0 10vw;
-	}
+	header {
+	padding: 8px 10vw 0;
+}
+
+main {
+	padding: 0 10vw;
+}
 }

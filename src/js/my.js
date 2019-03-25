@@ -20,7 +20,6 @@ mydoc_map.on('load', function () {
 function loadMap () {
 	mydoc_map = new mapboxgl.Map({
 		container: 'mydoc_map',
-		// style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v', // 'Rado
 		style: 'mapbox://styles/thatbram/cjtokh26902ad1fm43xqm4kv2', // 'Rado 2
 		zoom: 6,
 		center: [-105.547222, 39] // Geographic center of Colorado
@@ -28,6 +27,8 @@ function loadMap () {
 }
 
 var mydoc_id = '',
+	mydoc_id_search_val,
+	mydoc_id_valid = false,
 	mydoc_lat,
 	mydoc_long,
 	mydoc_loc,
@@ -37,10 +38,10 @@ var mydoc_id = '',
 	mydoc_map_popup;
 
 $('#mydoc_id_search_field').on('input', function () {
-	mydoc_id = $(this).val();
-	mydoc_id = $.trim(mydoc_id);
+	mydoc_id_search_val = $(this).val();
+	mydoc_id_search_val = $.trim(mydoc_id_search_val);
 
-	if (mydoc_id.length > 4) {
+	if (mydoc_id_search_val.length > 4) {
 		$('#mydoc_id_search_go').prop('disabled', false);
 	} else {
 		$('#mydoc_id_search_go').prop('disabled', true);
@@ -50,23 +51,35 @@ $('#mydoc_id_search_field').on('input', function () {
 function findMyDoC (mydoc_source) {
 	switch (mydoc_source) {
 		case 'user':
-			mydoc_id = $('#mydoc_id_search_field').val();
-			mydoc_id = $.trim(mydoc_id);
+			mydoc_id_search_val = $('#mydoc_id_search_field').val();
+			mydoc_id_search_val = $.trim(mydoc_id_search_val);
 		break;
 		case 'url':
 			var qStr_idx = location.href.indexOf('?');
 				qStr_idx = qStr_idx + 1;
 			var qStr = location.href.substr(qStr_idx, location.href.length)
 			
-			console.log('qStr: ' + qStr);
+			mydoc_id_search_val = qStr;
 
-			mydoc_id = qStr;
-
-			$('#mydoc_id_search_field').val(mydoc_id);
+			$('#mydoc_id_search_field').val(mydoc_id_search_val);
 	}
-	console.log('mydoc_id: ' + mydoc_id);
 
-	if (mydoc_id.toLowerCase() === 'alpha') {
+	console.log('mydoc_id_search_val: ' + mydoc_id_search_val);
+
+	var mydoc_data = {
+		id: 'alpha',
+		lat: 40.130,
+		long: -105.514
+	};
+
+	/** Matching "alpha" is the dev placeholder for matching a valid ID */
+	if (mydoc_id_search_val.toLowerCase() === 'alpha') {
+		mydoc_id_valid = true;
+	}
+
+	if (mydoc_id_valid) {
+		mydoc_id = mydoc_data.id;
+
 		switch (mydoc_source) {
 			case 'user':
 				loadMap();
@@ -74,16 +87,16 @@ function findMyDoC (mydoc_source) {
 			case 'url':
 				// 
 		}
-		
+
 		/** Set directly accessible URL */
 		let stateObj = {
 		    mydoc_id: mydoc_id,
 		};
 
-		history.pushState(stateObj, '', '?'+mydoc_id);
+		history.pushState(stateObj, '', '?' + mydoc_id);
 
-		mydoc_lat = 40.130;
-		mydoc_long = -105.514
+		mydoc_lat = mydoc_data.lat;
+		mydoc_long = mydoc_data.long;
 		mydoc_loc_str = mydoc_lat + ' ,' + mydoc_long;
 		mydoc_loc_mb = [mydoc_long, mydoc_lat];
 
