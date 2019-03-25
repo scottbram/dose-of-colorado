@@ -4,6 +4,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsd
 
 var mydoc_map;
 
+if (location.href.indexOf('?') !== -1) {
+	findMyDoC('url');
+}
+
 /*mydoc_map = new mapboxgl.Map({
 	container: 'mydoc_map',
 	// style: 'mapbox://styles/mapbox/cjaudgl840gn32rnrepcb9b9g',
@@ -62,11 +66,29 @@ $('#mydoc_id_search_field').on('input', function () {
 	}
 });
 
-function findMyDoC () {
+function findMyDoC (mydoc_source) {
 	loadMap();
 
-	mydoc_id = $('#mydoc_id_search_field').val();
-	mydoc_id = $.trim(mydoc_id);
+	switch (mydoc_source) {
+		case 'user':
+			mydoc_id = $('#mydoc_id_search_field').val();
+			mydoc_id = $.trim(mydoc_id);
+
+			let stateObj = {
+			    mydoc_id: mydoc_id,
+			};
+
+			history.pushState(stateObj, '', '?'+mydoc_id);
+		break;
+		case 'url':
+			var qStr_idx = location.href.indexOf('?');
+				qStr_idx = qStr_idx + 1;
+			var qStr = location.href.substr(qStr_idx, location.href.length)
+			
+			console.log('qStr: ' + qStr);
+
+			mydoc_id = qStr;
+	}
 
 	console.log('mydoc_id: ' + mydoc_id);
 
@@ -112,11 +134,11 @@ function findMyDoC () {
 }
 
 $('#mydoc_id_search_field').keypress( function (e) {
-	if (e.which === 13) {		
-		findMyDoC();
+	if (e.which === 13) {
+		findMyDoC('user');
 	}
 });
 
 $('#mydoc_id_search_go').click( function () {
-	findMyDoC();
+	findMyDoC('user');
 }); 
