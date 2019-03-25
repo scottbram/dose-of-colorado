@@ -75,12 +75,6 @@ function findMyDoC (mydoc_source) {
 		case 'user':
 			mydoc_id = $('#mydoc_id_search_field').val();
 			mydoc_id = $.trim(mydoc_id);
-
-			let stateObj = {
-			    mydoc_id: mydoc_id,
-			};
-
-			history.pushState(stateObj, '', '?'+mydoc_id);
 		break;
 		case 'url':
 			var qStr_idx = location.href.indexOf('?');
@@ -97,6 +91,13 @@ function findMyDoC (mydoc_source) {
 	console.log('mydoc_id: ' + mydoc_id);
 
 	if (mydoc_id.toLowerCase() === 'alpha') {
+		/** Set directly accessible URL */
+		let stateObj = {
+		    mydoc_id: mydoc_id,
+		};
+
+		history.pushState(stateObj, '', '?'+mydoc_id);
+
 		mydoc_lat = 40.130;
 		mydoc_long = -105.514
 		mydoc_loc_str = mydoc_lat + ' ,' + mydoc_long;
