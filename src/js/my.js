@@ -35,7 +35,8 @@ mydoc_map = new mapboxgl.Map({
 function loadMap () {
 	mydoc_map = new mapboxgl.Map({
 		container: 'mydoc_map',
-		style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v',
+		// style: 'mapbox://styles/thatbram/cjtiahjbp0nug1fm8qcymkp8v', // 'Rado
+		style: 'mapbox://styles/thatbram/cjtokh26902ad1fm43xqm4kv2', // 'Rado 2
 		zoom: 6,
 		center: [-105.547222, 39] // Geographic center of Colorado
 	});
