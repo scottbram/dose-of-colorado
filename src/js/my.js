@@ -41,7 +41,12 @@ function loadMap () {
 	});
 }
 
-var mydoc_id = 0,
+var mydoc_id = '',
+	mydoc_lat,
+	mydoc_long,
+	mydoc_loc,
+	mydoc_loc_str = '',
+	mydoc_loc_mb,
 	mydoc_marker,
 	mydoc_map_popup;
 
@@ -58,13 +63,20 @@ $('#mydoc_id_search_field').on('input', function () {
 function findMyDoC () {
 	loadMap();
 
+	mydoc_id = $('#mydoc_id_search_field').val();
+
 	console.log('mydoc_id: ' + mydoc_id);
 
 	if (mydoc_id.toLowerCase() === 'alpha') {
-		mydoc_map.setCenter([-105.514, 40.130]);
+		mydoc_lat = 40.130;
+		mydoc_long = -105.514
+		mydoc_loc_str = mydoc_lat + ' ,' + mydoc_long;
+		mydoc_loc_mb = [mydoc_long, mydoc_lat];
+
+		mydoc_map.setCenter(mydoc_loc_mb);
 		mydoc_map.setZoom(15);
 
-		mydoc_marker = new mapboxgl.Marker().setLngLat([-105.514, 40.130]).addTo(mydoc_map);
+		mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
 
 		var markerHeight = 38, markerRadius = 8, linearOffset = 10;
 
@@ -79,7 +91,9 @@ function findMyDoC () {
 			'right': [-markerRadius, (markerHeight - markerRadius) * -1]
 		};
 
-		var mydoc_map_popup_template = 'DoC id: alpha';
+		var mydoc_map_popup_template = '<span class="mydoc_id">' + mydoc_id + '</span>';
+			mydoc_map_popup_template += '<br>';
+			mydoc_map_popup_template += mydoc_loc_str;
 
 		mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
 			.setLngLat([-105.514, 40.130])

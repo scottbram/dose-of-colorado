@@ -1,0 +1,17 @@
+/** _mapbox.scss */
+/** 
+ * Mapbox targeted overrides
+ */
+
+.mapboxgl-popup-content {
+	padding: 16px 12px 8px;
+
+	.mydoc_id {
+		font-weight: bold;
+	}
+}
+
+.mapboxgl-popup-close-button {
+	height: 16px;
+	line-height: normal;
+}

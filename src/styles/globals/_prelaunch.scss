@@ -4,20 +4,29 @@
  */
 
 body.prelaunch {
-	padding-top: 60px;
+	// padding-top: 60px;
+	background-image: url(/assets/photos/james_creek_aspens_1.jpg);
+
+	@media (min-width: 992px) {
+		background-image: url(/assets/photos/rmnp_pond_and_peaks_1.jpg);
+	}
+
+	background-repeat: no-repeat;
+	background-size: cover;
 	text-align: center;
+
+	header {
+		background: rgba(255, 255, 255, 0.6);
+		margin-top: 30vh;
+		padding: 16px 0 14px;
+	}
 
 	h1 {
 		margin: 0 auto;
-		padding: 10vh 0 0;
+		padding: 0;
 	}
 
 	h2 {
 		margin: -4px 0 0;
-	}
-
-	#skybar {
-		height: 100px;
-		background: $highlight_color;
 	}
 }

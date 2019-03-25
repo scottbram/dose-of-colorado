@@ -7,27 +7,28 @@
 	z-index: 9;
 	position: fixed;
 	width: 100vw;
-	height: 8px;
 	opacity: 0.8;
 }
 
 #skybar {
 	top: 0;
+	height: 24px;
 	background: $highlight_color;
 }
 
 #earthbar {
 	bottom: 0;
+	height: 8px;
 	background: $secondary_color;
 }
 
 header, main {
 	margin: auto;
-	width: 90vw;
+	padding: 0 5vw;
 }
 
 @media (min-width: 992px) {
 	header, main {
-		width: 80vw;
+		padding: 0 10vw;
 	}
 }
