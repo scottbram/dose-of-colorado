@@ -58,7 +58,7 @@ function findMyDoC (mydoc_source) {
 			var qStr_idx = location.href.indexOf('?');
 				qStr_idx = qStr_idx + 1;
 			var qStr = location.href.substr(qStr_idx, location.href.length)
-			
+
 			mydoc_id_search_val = qStr;
 
 			$('#mydoc_id_search_field').val(mydoc_id_search_val);
@@ -131,7 +131,7 @@ function findMyDoC (mydoc_source) {
 
 		window.setTimeout( function () {
             $('#mydoc_map .alert').alert('close');
-        }, 6000);
+        }, 4000);
 	}
 }
 
@@ -143,4 +143,4 @@ $('#mydoc_id_search_field').keypress( function (e) {
 
 $('#mydoc_id_search_go').click( function () {
 	findMyDoC('user');
-}); 
+});

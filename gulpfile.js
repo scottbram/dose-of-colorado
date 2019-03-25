@@ -58,10 +58,17 @@ gulp.task('build-styles', function () {
 gulp.task('build-js', function () {
     return gulp.src(input.js)
     	.pipe(sourcemaps.init())
-        .pipe(concat('stew.js'))
-        // .pipe(gulp.dest(output.js))
-        .pipe(rename('stew.min.js'))
-        .pipe(terser())
+        // .pipe(concat('stew.js'))
+        // .pipe(rename('stew.min.js'))
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(terser({
+			keep_fnames: false,
+			mangle: {
+				toplevel: true
+			}
+	    }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.js));
 });
