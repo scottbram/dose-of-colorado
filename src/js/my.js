@@ -69,10 +69,10 @@ $('#mydoc_id_search_field').on('input', function () {
 });
 
 function findMyDoC (mydoc_source) {
-	loadMap();
-
 	switch (mydoc_source) {
 		case 'user':
+			loadMap();
+			
 			mydoc_id = $('#mydoc_id_search_field').val();
 			mydoc_id = $.trim(mydoc_id);
 		break;
@@ -134,7 +134,7 @@ function findMyDoC (mydoc_source) {
 
 		window.setTimeout( function () {
             $('#mydoc_map .alert').alert('close');
-        }, 4000);
+        }, 6000);
 	}
 }
 
