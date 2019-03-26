@@ -68,6 +68,7 @@ function findMyDoC (mydoc_source) {
 
 	var mydoc_data = {
 		id: 'alpha',
+		date: '2019-03-11',
 		lat: 40.130,
 		long: -105.514
 	};
@@ -97,7 +98,7 @@ function findMyDoC (mydoc_source) {
 
 		mydoc_lat = mydoc_data.lat;
 		mydoc_long = mydoc_data.long;
-		mydoc_loc_str = mydoc_lat + ' ,' + mydoc_long;
+		mydoc_loc_str = mydoc_lat + ', ' + mydoc_long;
 		mydoc_loc_mb = [mydoc_long, mydoc_lat];
 
 		mydoc_map.setCenter(mydoc_loc_mb);
