@@ -127,7 +127,7 @@ function findMyDoC (mydoc_source) {
 		;
 
 		mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
-			.setLngLat([-105.514, 40.130])
+			.setLngLat([mydoc_long, mydoc_lat])
 			.setHTML(mydoc_map_popup_template)
 			.addTo(mydoc_map);
 	} else {
