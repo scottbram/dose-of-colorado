@@ -119,9 +119,12 @@ function findMyDoC (mydoc_source) {
 			'right': [-markerRadius, (markerHeight - markerRadius) * -1]
 		};
 
-		var mydoc_map_popup_template = '<span class="mydoc_id">' + mydoc_id + '</span>';
-			mydoc_map_popup_template += '<br>';
-			mydoc_map_popup_template += mydoc_loc_str;
+		var mydoc_map_popup_template = '<span class="mydoc_id">' + mydoc_id + '</span>'
+			+ '<br>'
+			+ mydoc_loc_str
+			+ '<br>'
+			+ '<a href="#">Details</a>'
+		;
 
 		mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
 			.setLngLat([-105.514, 40.130])
