@@ -1,5 +1,7 @@
 /** my.js */
 
+console.log( $.urlParam('mydocid') );
+
 var mydoc_map;
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
@@ -12,6 +14,7 @@ mydoc_map = new mapboxgl.Map({
 });
 
 mydoc_map.on('load', function () {
+	// if (location.href.indexOf('?') !== -1) {
 	if (location.href.indexOf('?') !== -1) {
 		findMyDoC('url');
 	}
