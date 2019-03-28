@@ -1,8 +1,20 @@
 /** my.js */
 
-console.log( $.urlParam('mydocid') );
+var mydoc_id = $.urlParam('mydocid'),
+	mydoc_id_valid = false,
+	mydoc_id_search_val,
+	mydoc_map,
+	mydoc_lat,
+	mydoc_long,
+	mydoc_loc,
+	mydoc_loc_str = '',
+	mydoc_loc_mb,
+	mydoc_marker,
+	mydoc_map_popup;
 
-var mydoc_map;
+if ( mydoc_id !== false ) {
+	$('#mydoc_id_search_field').val(mydoc_id);
+}
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
 
@@ -14,8 +26,7 @@ mydoc_map = new mapboxgl.Map({
 });
 
 mydoc_map.on('load', function () {
-	// if (location.href.indexOf('?') !== -1) {
-	if (location.href.indexOf('?') !== -1) {
+	if ( mydoc_id !== false ) {
 		findMyDoC('url');
 	}
 });
@@ -28,17 +39,6 @@ function loadMap () {
 		center: [-105.547222, 39] // Geographic center of Colorado
 	});
 }
-
-var mydoc_id = '',
-	mydoc_id_search_val,
-	mydoc_id_valid = false,
-	mydoc_lat,
-	mydoc_long,
-	mydoc_loc,
-	mydoc_loc_str = '',
-	mydoc_loc_mb,
-	mydoc_marker,
-	mydoc_map_popup;
 
 $('#mydoc_id_search_field').on('input', function () {
 	mydoc_id_search_val = $(this).val();
