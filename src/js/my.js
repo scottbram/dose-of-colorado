@@ -31,6 +31,8 @@ mydoc_map = new mapboxgl.Map({
 
 mydoc_map.on('load', function () {
 
+	console.log('mydoc_map.on 1');
+
 	$('#mydoc_map_status').css('visibility', 'hidden');
 
 	console.log('mydoc_id_queryStr_val: ' + mydoc_id_queryStr_val);
@@ -38,8 +40,6 @@ mydoc_map.on('load', function () {
 	if ( mydoc_id_queryStr_val !== false ) {
 		findMyDoC('url');
 	}
-
-
 });
 
 function loadMap () {
@@ -52,8 +52,10 @@ function loadMap () {
 	
 	mydoc_map.on('load', function () {
 
-	$('#mydoc_map_status').css('visibility', 'hidden');
-});
+		console.log('mydoc_map.on loadMap');
+
+		$('#mydoc_map_status').css('visibility', 'hidden');
+	});
 }
 
 $('#mydoc_id_search_field').on('input', function () {
@@ -78,10 +80,6 @@ function findMyDoC (mydoc_source) {
 		break;
 		case 'url':
 			mydoc_id_search_val = mydoc_id_queryStr_val;
-
-			/*if ( mydoc_id !== false ) {
-				$('#mydoc_id_search_field').val(mydoc_id_search_val);
-			}*/
 	}
 
 	console.log('mydoc_id_search_val: ' + mydoc_id_search_val);
