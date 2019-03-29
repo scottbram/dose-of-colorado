@@ -23,6 +23,9 @@ mydoc_map = new mapboxgl.Map({
 });
 
 mydoc_map.on('load', function () {
+
+	console.log('mydoc_id_queryStr_val: ' + mydoc_id_queryStr_val);
+	
 	if ( mydoc_id_queryStr_val !== false ) {
 		findMyDoC('url');
 	}
@@ -61,6 +64,8 @@ function findMyDoC (mydoc_source) {
 				$('#mydoc_id_search_field').val(mydoc_id_search_val);
 			}
 	}
+
+	console.log('mydoc_id_search_val: ' + mydoc_id_search_val);
 
 	var mydoc_data = {
 		id: 'alpha',
