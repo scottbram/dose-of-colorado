@@ -17,7 +17,7 @@ body.prelaunch {
 
 	header {
 		background: rgba(255, 255, 255, 0.75);
-		margin-top: 30vh;
+		margin-top: 24vh;
 		padding: 16px 0 14px;
 	}
 
@@ -28,5 +28,9 @@ body.prelaunch {
 
 	h2 {
 		margin: -4px 0 0;
+	}
+
+	.site-bars {
+		display: none;
 	}
 }
