@@ -49,6 +49,11 @@ function loadMap () {
 		zoom: 6,
 		center: [-105.547222, 39] // Geographic center of Colorado
 	});
+	
+	mydoc_map.on('load', function () {
+
+	$('#mydoc_map_status').css('visibility', 'hidden');
+});
 }
 
 $('#mydoc_id_search_field').on('input', function () {
