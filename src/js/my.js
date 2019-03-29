@@ -12,6 +12,8 @@ var mydoc_id = $.urlParam('mydocid'),
 	mydoc_marker,
 	mydoc_map_popup;
 
+console.log('mydoc_id: ' + mydoc_id);
+
 if ( mydoc_id !== false ) {
 	$('#mydoc_id_search_field').val(mydoc_id);
 }
