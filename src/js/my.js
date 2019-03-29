@@ -1,6 +1,7 @@
 /** my.js */
 
 var mydoc_id = '',
+	mydoc_id_queryStr_val = $.urlParam('mydocid'),
 	mydoc_id_valid = false,
 	mydoc_id_search_val,
 	mydoc_map,
@@ -22,7 +23,7 @@ mydoc_map = new mapboxgl.Map({
 });
 
 mydoc_map.on('load', function () {
-	if ( mydoc_id !== false ) {
+	if ( mydoc_id_queryStr_val !== false ) {
 		findMyDoC('url');
 	}
 });
@@ -54,9 +55,11 @@ function findMyDoC (mydoc_source) {
 			mydoc_id_search_val = $.trim(mydoc_id_search_val);
 		break;
 		case 'url':
-			mydoc_id_search_val = $.urlParam('mydocid');
+			mydoc_id_search_val = mydoc_id_queryStr_val;
 
-			$('#mydoc_id_search_field').val(mydoc_id_search_val);
+			if ( mydoc_id !== false ) {
+				$('#mydoc_id_search_field').val(mydoc_id_search_val);
+			}
 	}
 
 	var mydoc_data = {
