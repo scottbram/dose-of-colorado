@@ -14,7 +14,7 @@ var mydoc_id = '',
 	mydoc_map_popup;
 
 if ( mydoc_id_queryStr_val !== false ) {
-	$('#mydoc_id_search_field').val(mydoc_id_search_val);
+	$('#mydoc_id_search_field').val(mydoc_id_queryStr_val);
 }
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
