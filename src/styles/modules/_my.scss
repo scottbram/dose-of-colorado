@@ -22,6 +22,16 @@
 		margin: 8px auto 0;*/
 	}
 
+	#mydoc_map_status {
+		display: inline-block;
+		margin-left: 8px;
+		color: rgb(152, 162, 152);
+
+		.spinner {
+			margin-right: 4px;
+		}
+	}
+
 	#mydoc_map {
 		margin-top: 8px;
 		width: 100%;

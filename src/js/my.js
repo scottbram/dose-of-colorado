@@ -5,6 +5,7 @@ var mydoc_id = '',
 	mydoc_id_valid = false,
 	mydoc_id_search_val,
 	mydoc_map,
+	mydoc_map_status,
 	mydoc_lat,
 	mydoc_long,
 	mydoc_loc,
@@ -15,6 +16,8 @@ var mydoc_id = '',
 
 if ( mydoc_id_queryStr_val !== false ) {
 	$('#mydoc_id_search_field').val(mydoc_id_queryStr_val);
+
+	$('#mydoc_id_search_go').prop('disabled', true);
 }
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
@@ -28,11 +31,15 @@ mydoc_map = new mapboxgl.Map({
 
 mydoc_map.on('load', function () {
 
+	$('#mydoc_map_status').css('visibility', 'hidden');
+
 	console.log('mydoc_id_queryStr_val: ' + mydoc_id_queryStr_val);
 
 	if ( mydoc_id_queryStr_val !== false ) {
 		findMyDoC('url');
 	}
+
+
 });
 
 function loadMap () {
@@ -56,6 +63,9 @@ $('#mydoc_id_search_field').on('input', function () {
 });
 
 function findMyDoC (mydoc_source) {
+
+	$('#mydoc_map_status').css('visibility', 'visible');
+
 	switch (mydoc_source) {
 		case 'user':
 			mydoc_id_search_val = $('#mydoc_id_search_field').val();
