@@ -1,6 +1,6 @@
 /** my.js */
 
-var mydoc_id = $.urlParam('mydocid'),
+var mydoc_id = '',
 	mydoc_id_valid = false,
 	mydoc_id_search_val,
 	mydoc_map,
@@ -11,12 +11,6 @@ var mydoc_id = $.urlParam('mydocid'),
 	mydoc_loc_mb,
 	mydoc_marker,
 	mydoc_map_popup;
-
-console.log('mydoc_id: ' + mydoc_id);
-
-if ( mydoc_id !== false ) {
-	$('#mydoc_id_search_field').val(mydoc_id);
-}
 
 mapboxgl.accessToken = 'pk.eyJ1IjoidGhhdGJyYW0iLCJhIjoiY2p0YzM1NW9zMHM5MTN5cDRsdnJoOGw3byJ9.A7umZVt9Sx7Nb8jfN6M03g';
 
@@ -60,16 +54,10 @@ function findMyDoC (mydoc_source) {
 			mydoc_id_search_val = $.trim(mydoc_id_search_val);
 		break;
 		case 'url':
-			var qStr_idx = location.href.indexOf('?');
-				qStr_idx = qStr_idx + 1;
-			var qStr = location.href.substr(qStr_idx, location.href.length)
-
-			mydoc_id_search_val = qStr;
+			mydoc_id_search_val = $.urlParam('mydocid');
 
 			$('#mydoc_id_search_field').val(mydoc_id_search_val);
 	}
-
-	console.log('mydoc_id_search_val: ' + mydoc_id_search_val);
 
 	var mydoc_data = {
 		id: 'alpha',
