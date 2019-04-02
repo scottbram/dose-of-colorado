@@ -9,6 +9,7 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 		if ( mydoc_id_queryStr_val === false ) {
 			let mydoc_map = mydoc.loadMap();
+
 			mydoc_map.on('load', function () {
 				/** Outside the map version */
 				$('#mydoc_map_status').css('visibility', 'hidden');
@@ -45,26 +46,44 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 		});
 	}
 	,
-	loadMap : function () {
+	loadMap : function (settings) {
 		$('#mydoc_map_status').css('visibility', 'visible');
+
+		var center = [-105.547222, 39];
+		var zoom = 6;
+
+		if (typeof settings !== 'undefined') {
+			/** If no map center is specified, set to geographic center of Colorado */
+			if (typeof settings.center !== 'undefined') {
+				center = settings.center;
+			}
+
+			/** If no map zoom level is specified, set to a level making Colorado identifiable across widest variety of resolutions */
+			if (typeof settings.zoom !== 'undefined') {
+				zoom = settings.zoom;
+			}
+		}
 
 		let mydoc_map = new mapboxgl.Map({
 			container: 'mydoc_map',
 			style: 'mapbox://styles/thatbram/cjtokh26902ad1fm43xqm4kv2', // 'Rado 2
-			zoom: 6,
-			center: [-105.547222, 39] // Geographic center of Colorado
+			center: center,
+			zoom: zoom
 		});
 
 		return mydoc_map;
 	}
 	,
 	findMyDoC : function (source) {
+
+		console.log('findMyDoC...');
+
 		let mydoc_id_search_val;
 
 		switch (source) {
 			case 'user':
 
-				console.log('findMyDoC: user');
+				console.log('...source: user');
 
 				var qStr_idx = location.href.indexOf('?');
 
@@ -79,49 +98,62 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 			break;
 			case 'url':
 
-				console.log('findMyDoC: url');
+				console.log('...source: url');
 
 				let mydoc_id_queryStr_val = $.urlParam('mydocid');
 				mydoc_id_search_val = mydoc_id_queryStr_val;
 		}
 
+		mydoc_id_search_val = mydoc_id_search_val.toLowerCase();
+
 		console.log('mydoc_id_search_val: ' + mydoc_id_search_val);
 
+		let mydoc_id_valid = false;
+
+		/** 
+		 * In an upcoming version, 
+		 * at this point a request is made 
+		 * to the myDoC datastore 
+		 * If a match is found, 
+		 * a success status is returned 
+		 * with the data in the response.
+		 *
+		 * For now, there is this...
+		 */
+		
 		let mydoc_data = {
-			id: 'alpha',
 			date: '2019-03-11',
 			lat: 40.130,
 			long: -105.514
 		};
 
-		let mydoc_id_valid = false;
-
 		/** Matching "alpha" is the dev placeholder for matching a valid ID */
-		if (mydoc_id_search_val.toLowerCase() === 'alpha') {
+		if (mydoc_id_search_val === 'alpha') {
 			mydoc_id_valid = true;
 		}
 
-		var mydoc_map = mydoc.loadMap();
+		if (mydoc_id_valid) {
+			let mydoc_id = mydoc_id_search_val;
 
-		mydoc_map.on('load', function () {
+			/** Set directly accessible URL */
+			history.pushState('', document.title, '?mydocid=' + mydoc_id);
 
-			console.log('mydoc_map.on loadMap');
+			let mydoc_lat = mydoc_data.lat;
+			let mydoc_long = mydoc_data.long;
+			let mydoc_loc_mb = [mydoc_long, mydoc_lat];
 
-			$('#mydoc_map_status').css('visibility', 'hidden');
+			let settings = {
+				center: mydoc_loc_mb,
+				zoom: 15
+			}
 
-			if (mydoc_id_valid) {
-				let mydoc_id = mydoc_data.id;
+			let mydoc_map = mydoc.loadMap(settings);
 
-				/** Set directly accessible URL */
-				history.pushState('', document.title, '?mydocid=' + mydoc_id);
+			mydoc_map.on('load', function () {
 
-				let mydoc_lat = mydoc_data.lat;
-				let mydoc_long = mydoc_data.long;
-				let mydoc_loc_str = mydoc_lat + ', ' + mydoc_long;
-				let mydoc_loc_mb = [mydoc_long, mydoc_lat];
+				console.log('findMyDoC mydoc_map.on(load)');
 
-				mydoc_map.setCenter(mydoc_loc_mb);
-				mydoc_map.setZoom(15);
+				$('#mydoc_map_status').css('visibility', 'hidden');
 
 				let mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
 
@@ -140,6 +172,8 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 					'right': [-markerRadius, (markerHeight - markerRadius) * -1]
 				};
 
+				let mydoc_loc_str = mydoc_lat + ', ' + mydoc_long;
+
 				mydoc_map_popup_template = '<span class="mydoc_id">' + mydoc_id + '</span>'
 					+ '<br>'
 					+ mydoc_loc_str
@@ -151,13 +185,13 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 					.setLngLat([mydoc_long, mydoc_lat])
 					.setHTML(mydoc_map_popup_template)
 					.addTo(mydoc_map);
-			} else {
-				$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+			});
+		} else {
+			$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 
-				window.setTimeout( function () {
-		            $('#mydoc_map .alert').alert('close');
-		        }, 4000);
-			}
-		});
+			window.setTimeout( function () {
+	            $('#mydoc_map .alert').alert('close');
+	        }, 4000);
+		}
 	}
 }).init();
