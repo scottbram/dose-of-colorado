@@ -4,21 +4,21 @@
  */
 
 body.prelaunch {
-	// padding-top: 60px;
+	padding: 32px 0 0;
+	background-repeat: no-repeat;
+	background-size: cover;
 	background-image: url(/assets/photos/james_creek_aspens_1.jpg);
 
 	@media (min-width: 992px) {
 		background-image: url(/assets/photos/rmnp_pond_and_peaks_1.jpg);
 	}
 
-	background-repeat: no-repeat;
-	background-size: cover;
 	text-align: center;
 
 	header {
-		background: rgba(255, 255, 255, 0.75);
-		margin-top: 24vh;
-		padding: 16px 0 14px;
+		padding: 16px 0;
+		border-bottom: 1px solid rgb(255, 255, 255);
+		background: rgba(255, 255, 255, 0.7);
 	}
 
 	h1 {

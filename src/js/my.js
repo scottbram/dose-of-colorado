@@ -12,7 +12,10 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 			mydoc_map.on('load', function () {
 				/** Outside the map version */
-				$('#mydoc_map_status').css('visibility', 'hidden');
+				// $('#mydoc_map_status').css('visibility', 'hidden');
+
+				/** Inside the map (minimalist) version */
+				$('#mydoc_map_status').hide();
 			});
 		} else {
 			$('#mydoc_id_search_field').val(mydoc_id_queryStr_val);
@@ -47,10 +50,14 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 	}
 	,
 	loadMap : function (settings) {
-		$('#mydoc_map_status').css('visibility', 'visible');
+		/** Outside the map version */
+		// $('#mydoc_map_status').css('visibility', 'visible');
+
+		/** Inside the map (minimalist) version */
+		$('#mydoc_map_status').show();
 
 		var center = [-105.547222, 39];
-		var zoom = 6;
+		var zoom = 6.5;
 
 		if (typeof settings !== 'undefined') {
 			/** If no map center is specified, set to geographic center of Colorado */
@@ -153,7 +160,11 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 				console.log('findMyDoC mydoc_map.on(load)');
 
-				$('#mydoc_map_status').css('visibility', 'hidden');
+				/** Outside the map version */
+				// $('#mydoc_map_status').css('visibility', 'hidden');
+
+				/** Inside the map (minimalist) version */
+				$('#mydoc_map_status').hide();
 
 				let mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
 

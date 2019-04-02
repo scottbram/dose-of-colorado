@@ -20,13 +20,18 @@
 				<label>My DoC ID</label>
 				<input type="text" id="mydoc_id_search_field" class="form-control" minlength="5" maxlength="8" autocapitalize="none" autocomplete="off" required>
 				<button type="button" id="mydoc_id_search_go" class="btn btn-primary" disabled><span class="btn_txt">Find My Dose</span></button>
-				<span id="mydoc_map_status">
+				<!-- <span id="mydoc_map_status">
 					<span class="spinner spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
 					<span id="mydoc_map_status_msg">Map loading</span>
-				</span>
+				</span> -->
 			</div>
 
-			<div id="mydoc_map"></div>
+			<div id="mydoc_map">
+				<div id="mydoc_map_status">
+					<span class="spinner spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+					<span id="mydoc_map_status_msg">Map loading</span>
+				</div>
+			</div>
 		</main>
 
 		<div id="skybar" class="site-bars"></div>
