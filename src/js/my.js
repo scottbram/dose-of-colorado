@@ -11,11 +11,11 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 			let mydoc_map = mydoc.loadMap();
 
 			mydoc_map.on('load', function () {
-				/** Outside the map version */
-				// $('#mydoc_map_status').css('visibility', 'hidden');
-
-				/** Inside the map (minimalist) version */
 				$('#mydoc_map_status').hide();
+
+				if ( $('#mydoc_map .alert').is(':visible') ) {
+					$('#mydoc_map .alert').removeAttr('style');
+				}
 			});
 		} else {
 			$('#mydoc_id_search_field').val(mydoc_id_queryStr_val);
@@ -84,6 +84,8 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 	findMyDoC : function (source) {
 
 		console.log('findMyDoC...');
+		
+		$('#mydoc_map .alert').alert('close');
 
 		let mydoc_id_search_val;
 
@@ -160,11 +162,11 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 				console.log('findMyDoC mydoc_map.on(load)');
 
-				/** Outside the map version */
-				// $('#mydoc_map_status').css('visibility', 'hidden');
-
-				/** Inside the map (minimalist) version */
 				$('#mydoc_map_status').hide();
+
+				if ( $('#mydoc_map .alert').is(':visible') ) {
+					$('#mydoc_map .alert').removeAttr('style');
+				}
 
 				let mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
 
@@ -198,11 +200,33 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 					.addTo(mydoc_map);
 			});
 		} else {
+			let mydoc_map = mydoc.loadMap();
+
+			mydoc_map.on('load', function () {
+
+				console.log('findMyDoC mydoc_map.on(load) - invalid id');
+
+				$('#mydoc_map_status').hide();
+
+				if ( $('#mydoc_map .alert').is(':visible') ) {
+					$('#mydoc_map .alert').removeAttr('style');
+				}
+			});
+
 			$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 
-			window.setTimeout( function () {
+			console.log( '$(#mydoc_map_status).is(:visible): ' +  $('#mydoc_map_status').is(':visible') );
+
+			if ( $('#mydoc_map_status').is(':visible') ) {
+				let mapStatus_h = $('#mydoc_map_status').outerHeight();
+
+				$('#mydoc_map .alert:first').css('margin-top', mapStatus_h + 16 + 'px');
+			}
+
+			/** Autoclose the alerts */
+			/*window.setTimeout( function () {
 	            $('#mydoc_map .alert').alert('close');
-	        }, 4000);
+	        }, 4000);*/
 		}
 	}
 }).init();

@@ -2,6 +2,7 @@
 # dose-of-colorado.netlify.com
 
 # proxy the request
-# https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200
-# https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200
-https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200!
+# https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200!
+
+# redirect the request
+https://my.doseofcolorado.com/* https://doseofcolorado.com/:splat 301!
