@@ -59,16 +59,16 @@ gulp.task('build-js', function () {
     return gulp.src(input.js)
     	.pipe(sourcemaps.init())
         // .pipe(concat('stew.js'))
-        // .pipe(rename('stew.min.js'))
-        .pipe(rename({
-            suffix: '.min'
-        }))
         .pipe(terser({
 			keep_fnames: false,
 			mangle: {
 				toplevel: true
 			}
 	    }))
+	    // .pipe(rename('stew.min.js'))
+        .pipe(rename({
+            suffix: '.min'
+        }))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(output.js));
 });
