@@ -3,44 +3,54 @@
  * My DoC module styles
  */
 
-.mydoc {
-	#mydoc_id_search {
-		width: 100%;
+
+#mydoc_id_search {
+	width: 100%;
+}
+
+#mydoc_id_search_field {
+	display: inline-block;
+	margin-top: 8px;
+	margin-right: 8px;
+	width: 112px;
+	text-align: center;
+	text-transform: lowercase;
+}
+
+#mydoc_id_search_go {
+	/*display: block;
+	margin: 8px auto 0;*/
+}
+
+#mydoc_map_status {
+	z-index: 9999;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding: 8px;
+	width: 100%;
+	background: $frosted_glass_bg;
+	color: $neutral_font_color;
+
+	.spinner {
+		margin-right: 4px;
 	}
+}
 
-	#mydoc_id_search_field {
-		display: inline-block;
-		margin-top: 8px;
-		margin-right: 8px;
-		width: 112px;
-		text-align: center;
-		text-transform: lowercase;
-	}
+#mydoc_map {
+    position: relative;
+	margin-top: 8px;
+	width: 100%;
+	height: 500px;
+	background: radial-gradient(circle, transparent 20%, rgb(234, 234, 234) 20%, rgb(234, 234, 234) 80%, transparent 80%, transparent), 
+		radial-gradient(circle, transparent 20%, rgb(234, 234, 234) 20%, rgb(234, 234, 234) 80%, transparent 80%, transparent) 50px 50px,
+		linear-gradient(silver 8px, transparent 8px) 0 -4px,
+		linear-gradient(90deg, silver 8px, transparent 8px) -4px 0;
+	background-color: rgb(234, 234, 234);
+	background-size:100px 100px, 100px 100px, 50px 50px, 50px 50px;
 
-	#mydoc_id_search_go {
-		/*display: block;
-		margin: 8px auto 0;*/
-	}
-
-	#mydoc_map_status {
-		/** Outside the map version */
-		display: inline-block;
-		margin-left: 8px;
-		color: rgb(152, 162, 152);
-
-		.spinner {
-			margin-right: 4px;
-		}
-	}
-
-	#mydoc_map {
-		margin-top: 8px;
-		width: 100%;
-		height: 500px;
-
-		.alert {
-			margin: 8px;
-		}
+	.alert {
+		margin: 8px;
 	}
 }
 
@@ -53,19 +63,19 @@
 		h1 {
 			margin: 0 8px 0 0;
 		}
+	}
 
-		#mydoc_id_search_field {
-			//
-		}
+	#mydoc_id_search_field {
+		//
+	}
 
-		#mydoc_id_search_go {
-			display: inline-block;
-			margin-right: 0;
-			margin-left: 0;
-		}
+	#mydoc_id_search_go {
+		display: inline-block;
+		margin-right: 0;
+		margin-left: 0;
+	}
 
-		#mydoc_map {
-			height: 680px;
-		}
+	#mydoc_map {
+		height: 680px;
 	}
 }

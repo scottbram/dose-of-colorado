@@ -11,8 +11,11 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 			let mydoc_map = mydoc.loadMap();
 
 			mydoc_map.on('load', function () {
-				/** Outside the map version */
-				$('#mydoc_map_status').css('visibility', 'hidden');
+				$('#mydoc_map_status').hide();
+
+				if ( $('#mydoc_map .alert').is(':visible') ) {
+					$('#mydoc_map .alert').removeAttr('style');
+				}
 			});
 		} else {
 			$('#mydoc_id_search_field').val(mydoc_id_queryStr_val);
@@ -21,8 +24,6 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 			mydoc.findMyDoC('url');
 		}
-
-		// $('#mydoc_map').append('<div id="mydoc_map_status" class="alert alert-primary fade show" role="alert"><span class="spinner spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Map loading...</div>');
 
 		$('#mydoc_id_search_field').on('input', function () {
 			let mydoc_id_search_val = $(this).val();
@@ -47,10 +48,10 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 	}
 	,
 	loadMap : function (settings) {
-		$('#mydoc_map_status').css('visibility', 'visible');
+		$('#mydoc_map_status').show();
 
 		var center = [-105.547222, 39];
-		var zoom = 6;
+		var zoom = 6.5;
 
 		if (typeof settings !== 'undefined') {
 			/** If no map center is specified, set to geographic center of Colorado */
@@ -77,6 +78,8 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 	findMyDoC : function (source) {
 
 		console.log('findMyDoC...');
+
+		$('#mydoc_map .alert').alert('close');
 
 		let mydoc_id_search_val;
 
@@ -120,7 +123,7 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 		 *
 		 * For now, there is this...
 		 */
-		
+
 		let mydoc_data = {
 			date: '2019-03-11',
 			lat: 40.130,
@@ -153,7 +156,11 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 				console.log('findMyDoC mydoc_map.on(load)');
 
-				$('#mydoc_map_status').css('visibility', 'hidden');
+				$('#mydoc_map_status').hide();
+
+				if ( $('#mydoc_map .alert').is(':visible') ) {
+					$('#mydoc_map .alert').removeAttr('style');
+				}
 
 				let mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
 
@@ -187,11 +194,33 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 					.addTo(mydoc_map);
 			});
 		} else {
+			let mydoc_map = mydoc.loadMap();
+
+			mydoc_map.on('load', function () {
+
+				console.log('findMyDoC mydoc_map.on(load) - invalid id');
+
+				$('#mydoc_map_status').hide();
+
+				if ( $('#mydoc_map .alert').is(':visible') ) {
+					$('#mydoc_map .alert').removeAttr('style');
+				}
+			});
+
 			$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 
-			window.setTimeout( function () {
+			console.log( '$(#mydoc_map_status).is(:visible): ' +  $('#mydoc_map_status').is(':visible') );
+
+			if ( $('#mydoc_map_status').is(':visible') ) {
+				let mapStatus_h = $('#mydoc_map_status').outerHeight();
+
+				$('#mydoc_map .alert:first').css('margin-top', mapStatus_h + 16 + 'px');
+			}
+
+			/** Autoclose the alerts */
+			/*window.setTimeout( function () {
 	            $('#mydoc_map .alert').alert('close');
-	        }, 4000);
+	        }, 4000);*/
 		}
 	}
 }).init();
