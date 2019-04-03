@@ -5,12 +5,29 @@
 
 body.prelaunch {
 	padding: 32px 0 0;
+	// background-image: url(/assets/photos/james_creek_aspens_1.jpg);
+	// background-size: cover;
+
+	// background-image: url(/assets/photos/v_lg_sm_sm_1.jpg);
+	// background-size: 150%;
+	// background-position: 25% 20%;
+
+	background-image: url(/assets/photos/v_sm_2.jpg);
+	background-size: 170%;
+	background-position: 50% 33%;
+
 	background-repeat: no-repeat;
-	background-size: cover;
-	background-image: url(/assets/photos/james_creek_aspens_1.jpg);
 
 	@media (min-width: 992px) {
-		background-image: url(/assets/photos/rmnp_pond_and_peaks_1.jpg);
+		// background-image: url(/assets/photos/rmnp_pond_and_peaks_1.jpg);
+		
+		// background-image: url(/assets/photos/h_sm_lg_1.jpg);
+		// background-size: cover;
+		// background-position: 50% 65%;
+
+		background-image: url(/assets/photos/h_sm_2.jpg);
+		background-size: cover;
+		background-position: 50%;
 	}
 
 	text-align: center;

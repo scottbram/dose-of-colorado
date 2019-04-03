@@ -5,4 +5,4 @@
 # https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200!
 
 # redirect the request
-https://my.doseofcolorado.com/* https://doseofcolorado.com/my.html:splat 301!
+https://my.doseofcolorado.com 		https://doseofcolorado.com/my.html 301!
