@@ -3,7 +3,7 @@
  * Sitewide styles
  */
 
-.site-bars {
+/*.site-bars {
 	z-index: 9;
 	position: fixed;
 	width: 100vw;
@@ -20,26 +20,20 @@
 	bottom: 0;
 	height: 8px;
 	background: $secondary_color;
-}
+}*/
 
-header, main {
-	margin: auto;
-}
-
-header {
-	padding: 8px 5vw 0;
-}
-
-main {
-	padding: 0 5vw;
+#site_header {
+	padding-right: 5vw;
+	padding-left: 5vw;
+	/*background-color: $primary_color_bg;
+	border-bottom: 1px solid $primary_color;*/
+	background-color: $highlight_color_bg;
+	border-bottom: 1px solid $highlight_color;
 }
 
 @media (min-width: 992px) {
-	header {
-		padding: 8px 10vw 0;
-	}
-
-	main {
-		padding: 0 10vw;
+	#site_header {
+		padding-right: 10vw;
+		padding-left: 10vw;
 	}
 }

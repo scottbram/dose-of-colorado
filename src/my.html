@@ -10,16 +10,16 @@
 		<link rel="stylesheet" href="styles/stew.min.css">
 	</head>
 	<body class="mydoc">
-		<header>
-			<h1><a href="https://doseofcolorado.com/my"><span>My</span> Dose <span>of</span> Colorado</a></h1>
-			<h2>Where is the origin of your DoC? Find out here!</h2>
+		<header id="site_header">
+			<h1><a href="/my"><span>My</span> Dose <span>of</span> Colorado</a></h1>
+			<h2>Where was my DoC born? Find out here!</h2>
 		</header>
 
 		<main>
 			<div id="mydoc_id_search">
-				<label>My DoC ID</label>
+				<label>My DoC id</label>
 				<input type="text" id="mydoc_id_search_field" class="form-control" minlength="5" maxlength="8" autocapitalize="none" autocomplete="off" required>
-				<button type="button" id="mydoc_id_search_go" class="btn btn-primary" disabled><span class="btn_txt">Find My Dose</span></button>
+				<button type="button" id="mydoc_id_search_go" class="btn btn-primary" disabled><span class="btn_txt">Find it!</span></button>
 			</div>
 
 			<div id="mydoc_map">
@@ -28,10 +28,38 @@
 					<span id="mydoc_map_status_msg">Map loading</span>
 				</div>
 			</div>
+
+			<aside id="mydoc_details">
+				<header class="aside_header">
+					<h3>Dose Details</h3>
+					<a href="#">return to search</a>
+				</header>
+
+				<dl>
+					<dt>ID</dt>
+						<dd>alpha</dd>
+					<dt>Location</dt>
+						<dd>40.130, -105.514</dd>
+					<dt>Date collected</dt>
+						<dd>Mon 11 Mar 2019</dd>
+				</dl>
+
+				<section style="clear: both; opacity: 0.2; margin-bottom: 8px; height: 3150px; background-color: silver;"></section>
+
+				<section style="clear: both; opacity: 0.2; margin-bottom: 8px; height: 160px; background-color: gray;"></section>
+
+				<section style="clear: both; opacity: 0.05;">
+					<p>Section ideas</p>
+					<ul>
+						<li>Demo placeholder (e.g., alpha)?</li>
+						<li>Shop promo</li>
+					</ul>
+				</section>
+			</aside>
 		</main>
 
-		<div id="skybar" class="site-bars"></div>
-		<div id="earthbar" class="site-bars"></div>
+		<!-- <div id="skybar" class="site-bars"></div>
+		<div id="earthbar" class="site-bars"></div> -->
 
 		<script src='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.js'></script>
 

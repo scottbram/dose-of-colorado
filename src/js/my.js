@@ -185,7 +185,7 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 					+ '<br>'
 					+ mydoc_loc_str
 					+ '<br>'
-					+ '<a href="#">Details</a>'
+					+ '<a href="#mydoc_details">Details</a>'
 				;
 
 				mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
