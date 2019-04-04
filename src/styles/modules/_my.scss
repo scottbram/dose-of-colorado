@@ -1,18 +1,22 @@
 /** _my.scss */
+
 /** 
  * My DoC module styles
  */
 
-
 #mydoc_id_search {
 	width: 100%;
+
+	label {
+		margin-right: 4px;
+	}
 }
 
 #mydoc_id_search_field {
 	display: inline-block;
 	margin-top: 8px;
-	margin-right: 8px;
-	width: 112px;
+	margin-right: 4px;
+	width: 106px;
 	text-align: center;
 	text-transform: lowercase;
 }
@@ -37,9 +41,25 @@
 	}
 }
 
+#mydoc_details {
+	padding: 8px 0;
+
+	header {
+		a {
+			float: right;
+			text-decoration: none;
+			font-size: 0.9rem;
+		}
+	}
+
+	dt {
+		width: 35%;
+	}
+}
+
 #mydoc_map {
     position: relative;
-	margin-top: 8px;
+	margin: 8px 0;
 	width: 100%;
 	height: 500px;
 	background: radial-gradient(circle, transparent 20%, rgb(234, 234, 234) 20%, rgb(234, 234, 234) 80%, transparent 80%, transparent), 
@@ -76,6 +96,18 @@
 	}
 
 	#mydoc_map {
+		float: left;
+		width: 70%;
 		height: 680px;
+	}
+
+	#mydoc_details {
+		float: left;
+		margin-left: 1%;
+		width: 29%;
+
+		dt {
+			width: 24%;
+		}
 	}
 }
