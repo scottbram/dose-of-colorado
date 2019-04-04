@@ -5,10 +5,36 @@
 
 body {
 	margin: 0;
-	padding: 24px 0 16px;
+	padding: 0;
 	min-height: 100vh;
-	// background: rgba(255, 255, 255, 0.75);
 	color: $font_color;
+}
+
+header, main {
+	margin: auto;
+}
+
+header {
+	padding: 8px;
+}
+
+main {
+	padding: 0 5vw;
+}
+
+aside {
+	padding: 16px 0 8px;
+
+	header {
+		// border-bottom: 1px solid; // Color should inherit
+		background: $primary_color_bg;
+		margin-bottom: 8px;
+
+		h3 {
+			display: inline-block;
+			margin: 0;
+		}
+	}
 }
 
 h1 {
@@ -23,7 +49,8 @@ h1 {
 
 	span {
 		display: inline-block;
-		opacity: 0.5;
+		// opacity: 0.5;
+		color: $primary_color_subdued;
 		margin: 0 -4px;
 		padding: 0;
 		font-weight: 400;
@@ -31,10 +58,11 @@ h1 {
 
 	a {
 	    color: inherit;
+	    text-decoration: none;
 
 	    &:hover {
 	    	color: inherit;
-			text-decoration: none;
+		    text-decoration: none;
 	    }
 	}
 }
@@ -46,12 +74,69 @@ h2 {
 	font-size: 0.95rem;
 }
 
+h3 {
+	color: $primary_color;
+	font-family: 'B612';
+	font-size: 1.2rem;
+	font-weight: 400;
+	text-transform: lowercase;
+	letter-spacing: -1px;
+
+	span {
+		display: inline-block;
+		// opacity: 0.5;
+		color: $primary_color_subdued;
+		margin: 0 -4px;
+		padding: 0;
+		font-weight: 400;
+	}
+}
+
+dl, ol, ul {
+	display: inline-block;
+	margin-bottom: 8px;
+    width: 100%;
+}
+
+dt, dd {
+	float: left;
+	margin: 0 0 4px;
+	padding: 2px 4px;
+}
+
+dt {
+	clear: left;
+	margin-right: 4px;
+	color: $neutral_font_color;
+	text-align: right;
+	font-family: 'B612';
+	font-size: 0.95rem;
+	font-weight: 400;
+}
+
+dd {
+	color: $secondary_color;
+	font-family: 'Gaegu';
+	font-size: 1.4rem;
+	font-weight: 700;
+	line-height: 0.95;
+}
+
 input {
 	border-radius: $border-radius;
 }
 
 button {
 	border-radius: $border-radius;
+}
+
+a {
+	color: $highlight_color_intense;
+	text-decoration: underline;
+
+	&:hover {
+		color: $highlight_color_darker;
+	}
 }
 
 @media (min-width: 992px) {
@@ -62,4 +147,8 @@ button {
 	h1 {
 		margin: 0 8px 0 0;
 	}*/
+
+	main {
+		padding: 0 10vw;
+	}
 }

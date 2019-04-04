@@ -4,10 +4,24 @@
  */
 
 $primary_color: rgb(64, 164, 0);
+// $primary_color_subdued: rgba(64, 164, 0, 0.6);
+$primary_color_subdued: rgb(140, 200, 102);
+// $primary_color_bg: rgba(64, 164, 0, 0.1);
+$primary_color_intense: rgb(55, 143, 0);
+$primary_color_bg: rgb(236, 246, 230);
+
 // $secondary_color: rgb(93, 54, 9);
 $secondary_color: rgb(116, 67, 11);
+// $secondary_color_bg: rgba(116, 67, 11, 0.1);
+$secondary_color_bg: rgb(241, 236, 231);
+
 // $highlight_color: rgb(164, 219, 255);
 $highlight_color: rgb(102, 204, 255);
+$highlight_color_intense: rgb(65, 142, 223);
+$highlight_color_darker: rgb(73, 134, 189);
+// $highlight_color_bg: rgba(102, 204, 255, 0.2);
+$highlight_color_bg: rgb(224, 245, 255);
+
 $font_color: rgb(50, 50, 50);
 $neutral_font_color: rgb(152, 162, 152);
 
