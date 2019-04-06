@@ -1,7 +1,7 @@
 const gulp 		= require('gulp'),
 	
 	/** Plug-ins */
-	concat 		= require('gulp-concat'),
+	// concat 		= require('gulp-concat'),
 	htmlmin 	= require('gulp-htmlmin'),
 	rename 		= require('gulp-rename'),
 	sass 		= require('gulp-sass'),
