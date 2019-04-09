@@ -1,4 +1,4 @@
-exports.handler = async (event, context) => {
+/*exports.handler = async (event, context) => {
 	const mydocid = event.queryStringParameters.mydocid;
 	const { AIRTABLE_API_KEY } = process.env;
 
@@ -9,4 +9,11 @@ exports.handler = async (event, context) => {
 	    if (err) { console.error(err); return; }
 	    console.log(record);
 	});
+};*/
+
+exports.handler = function(event, context, callback) {
+  callback(null, {
+    statusCode: 200,
+    body: "Hello, World"
+  });
 };
