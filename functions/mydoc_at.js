@@ -1,4 +1,7 @@
 exports.handler = async (event, context) => {
+
+	console.log(event);
+	
 	const mydocid = event.queryStringParameters.mydocid
 	const { AIRTABLE_API_KEY } = process.env
 	const Airtable = require('airtable')
