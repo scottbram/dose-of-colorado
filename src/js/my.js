@@ -126,8 +126,9 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 		let mydoc_data = {
 			date: '2019-03-11',
-			lat: 40.130,
-			long: -105.514
+			lat: '40.1298',
+			long: '-105.5145',
+			ytCode: ''
 		};
 
 		/** Matching "alpha" is the dev placeholder for matching a valid ID */
@@ -141,6 +142,17 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 			/** Set directly accessible URL */
 			history.pushState('', document.title, '?mydocid=' + mydoc_id);
 
+			/** 
+			 * For image display/carousel, use naming convention, for example:
+			 * - alpha01.jpg, alpha02.jpg
+			 * or
+			 * - /alpha/01.jpg, /alpha/02.jpg
+			 */
+
+			/*if (ytCode.length > 0) {
+				let ytLink = 'https://youtube.com/watch?v=' + ytCode;
+			}*/
+
 			let mydoc_lat = mydoc_data.lat;
 			let mydoc_long = mydoc_data.long;
 			let mydoc_loc_mb = [mydoc_long, mydoc_lat];
@@ -148,7 +160,7 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 			let settings = {
 				center: mydoc_loc_mb,
 				zoom: 15
-			}
+			};
 
 			let mydoc_map = mydoc.loadMap(settings);
 
