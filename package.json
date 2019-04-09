@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/thatbram/dose-of-colorado#readme",
   "devDependencies": {
-    "airtable": "^0.5.10",
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-htmlmin": "^5.0.1",
@@ -27,5 +26,8 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-terser": "^1.1.7",
     "netlify-lambda": "^1.4.3"
+  },
+  "dependencies": {
+    "airtable": "^0.5.10"
   }
 }
