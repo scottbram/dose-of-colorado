@@ -70,5 +70,26 @@
 		<script src="js/site.min.js"></script>
 		<script src="js/vendor/jqplugins.min.js"></script>
 		<script src="js/my.min.js"></script>
+		<script>
+			/** https://stackoverflow.com/questions/3379645/preload-font-face-fonts-to-stop-firefox-flicker-delay#4478192 */
+			(function () {
+				var d = document, e = d.documentElement, s = d.createElement('style');
+
+				if (e.style.MozTransform === '') { // gecko 1.9.1 inference
+					// s.textContent = 'body{visibility:hidden}';
+					s.textContent = 'body{text-indent:-9999px}';
+					
+					e.firstChild.appendChild(s);
+					
+					function f () {
+						var ffrendertime = setTimeout ( function(){s.parentNode && s.parentNode.removeChild(s)} , 200 );
+					}
+
+					addEventListener('load', f, false);
+
+					setTimeout(f, 2000);
+				}
+			})();
+		    </script>
 	</body>
 </html>
