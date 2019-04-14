@@ -7,7 +7,7 @@ exports.handler = function (event, context, callback) {
 	
 	const Airtable = require('airtable')
 
-	console.log('Airtable: ');
+	console.log('Airtable: ')
 
 	const base = new Airtable({
 			apiKey: AIRTABLE_API_KEY
