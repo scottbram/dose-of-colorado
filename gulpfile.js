@@ -18,14 +18,14 @@ const gulp 		= require('gulp'),
 	 	'styles': in_root + '/styles/**/*.scss',
 		'js': in_root + '/js/**/*.js',
 		'images': in_root + '/assets/**/*',
-		'redir': in_root + '/_redirects'
+		// 'redir': in_root + '/_redirects'
 	},
 	output = {
 		'html': out_root,
 		'styles': out_root + '/styles',
 		'js': out_root + '/js',
 		'images': out_root + '/assets',
-		'redir': out_root
+		// 'redir': out_root
 	};
 
 /** Process HTML files */
@@ -88,9 +88,15 @@ gulp.task('imagemin', function () {
 
 /** Copy _redirect file for subdomains */
 gulp.task('copy_redir', function () {
-	return gulp.src(input.redir)
-		.pipe(gulp.dest(output.redir));
+	return gulp.src(in_root + '/_redirects')
+		.pipe(gulp.dest(out_root));
+});
+
+/** Copy _redirect file for subdomains */
+gulp.task('copy_videos', function () {
+	return gulp.src(in_root + '/assets/videos/**/*')
+		.pipe(gulp.dest(out_root + '/assets/videos'));
 });
 
 /** Default task */
-gulp.task('default', gulp.parallel('build-html', 'build-styles', 'build-js', 'imagemin', 'copy_redir'));
+gulp.task('default', gulp.parallel('imagemin', 'copy_redir', 'copy_videos', 'build-html', 'build-styles', 'build-js'));
