@@ -1,56 +1,178 @@
-exports.handler = function (event, context, callback) {
-	const mydocid = event.queryStringParameters.mydocid
+// var theData = [];
+const Airtable = require('airtable')
+const { AIRTABLE_API_KEY } = process.env
+const mydoc_data = new Airtable({
+		apiKey: AIRTABLE_API_KEY
+	})
+	.base('appyIApZ1WBML8Rmo')
 
-	console.log('mydocid: ' + mydocid);
+exports.handler = async (event, context) => {
+	const mydocid_query = event.queryStringParameters.mydocid
 
-	const { AIRTABLE_API_KEY } = process.env
-	
-	const Airtable = require('airtable')
+	try {
+		var theGoods
 
-	console.log('Airtable: ')
+		const resp = await mydoc_data('mydoc_locations')
+			.select({
+				maxRecords: 100,
+				// filterByFormula: "NOT({mydocid} = '')"
+				// filterByFormula: 'IF({mydocid} = ' + mydocid_query + ')'
+				// filterByFormula: "{mydocid}=" + mydocid_query
+				// filterByFormula: `{mydocid} = "mydocid_query"`
+				// filterByFormula: '{mydocid}='+mydocid_query
+			})
+			.firstPage()
 
-	const base = new Airtable({
-			apiKey: AIRTABLE_API_KEY
-		})
-		.base('appyIApZ1WBML8Rmo');
+		const respJson = resp[0].fields
 
-	var builtBody;
+		if (typeof resp !== 'undefined') {
+			theGoods = {
+	            statusCode: 200,
+	            headers: { 'Content-Type': 'application/json' },
+	            body: JSON.stringify(respJson)
+	        }
+		} else {
+			theGoods = {
+	            statusCode: 204,
+	            body: 'I got nada...'
+	        }
+		}
 
-	base('mydoc_locations').select({
-	    filterByFormula: "NOT({mydocid} = '')",
-	    maxRecords: 10,
-	    view: "Grid view"
-	}).eachPage(function page(records, fetchNextPage) {
-	    // This function (`page`) will get called for each page of records.
+		return theGoods
 
-	    builtBody = JSON.stringify(records);
+		// const resp = await mydoc_data('mydoc_locations')
+		/*mydoc_data('mydoc_locations')
+			.select({
+				maxRecords: 100,
+				view: "Grid view"
+			})
+			.eachPage(
+				function page (records, fetchNextPage) {
+					// This function (`page`) will get called for each page of records.
 
-	    /*records.forEach(function(record) {
-	    	let strRet = 'Retrieved:' + record.get('mydocid')
-	        
-	        console.log(strRet);
+					records.forEach( function (record) {
 
-	    });*/
+						console.log('record: ')
+						console.log(record)
 
-	    // To fetch the next page of records, call `fetchNextPage`.
-	    // If there are more records, `page` will get called again.
-	    // If there are no more records, `done` will get called.
-	    fetchNextPage();
+						const loopId = record.get('mydocid')
 
-	}, function done(err) {
-	    if (err) { console.error(err); return; }
+						console.log('loopId: ' + loopId)
 
-	    callback(null, {
-			statusCode: 200,
-			body: builtBody
-		});
-	});
-}
+						console.log('Retrieved', loopId);
 
-/*exports.handler = function (event, context, callback) {
-// exports.handler = async (event, context) => {
+						// console.log('mydocid_query: ' + mydocid_query)
 
-	console.log('context: ');
-	console.log(context);
+						// if ( loopId === mydocid_query ) {
 
-}*/
+							// console.log('WHOOMP, DEHRITIZ')
+
+							// return record
+						// }
+					});
+
+					// To fetch the next page of records, call `fetchNextPage`.
+					// If there are more records, `page` will get called again.
+					// If there are no more records, `done` will get called.
+					fetchNextPage();
+				},
+				function done (err) {
+
+					console.log(' ')
+					console.log(' - - - - - - - ')
+					console.log('err: ')
+					console.log(' ')
+					console.log( err )
+					console.log(' ')
+					console.log(' - ^ err ^ - ')
+					console.log(' - - - - - - - ')
+
+					if (err) {
+						
+						console.log('not so much')
+						
+						console.error(err);
+						
+						return;
+					}
+				}
+			)*/
+		
+		/*console.log(' ')
+		console.log(' - - - - - - - ')
+		console.log('resp: ')
+		console.log(' ')
+		console.log( resp )
+		console.log(' ')
+		console.log(' - ^ resp ^ - ')
+		console.log(' - - - - - - - ')
+
+		console.log(' ')
+		console.log(' - - - - - - - ')
+		console.log('resp[0]: ')
+		console.log(' ')
+		console.log( resp[0] )
+		console.log(' ')
+		console.log(' - ^ resp[0] ^ - ')
+		console.log(' - - - - - - - ')
+
+		const respJson = resp[0].fields
+
+		console.log(' ')
+		console.log(' - - - - - - - ')
+		console.log('respJson: ')
+		console.log(' ')
+		console.log( respJson )
+		console.log(' ')
+		console.log(' - ^ respJson ^ - ')
+		console.log(' - - - - - - - ')
+
+		if (typeof resp !== 'undefined') {
+			theGoods = {
+	            statusCode: 200,
+	            headers: { 'Content-Type': 'application/json' },
+	            body: JSON.stringify(respJson)
+	        }
+		} else {
+			theGoods = {
+	            statusCode: 204,
+	            body: 'I got nada...'
+	        }
+		}
+		
+		console.log(' ')
+		
+		console.log(' - - - - - - - ')
+		console.log('return (try): ')
+		console.log(' ')
+
+		return theGoods*/
+
+		/*return {
+            statusCode: 200,
+            body: JSON.stringify(theData)
+        }*/
+	} catch (errObj) {
+		console.log(' ')
+		console.log(' - - - - - - - - - - - - - - ')
+		console.log('errObj.message: ')
+		console.log(' ')
+		console.error(errObj.message)
+		console.log(' ')
+		console.log(' - ^ errObj.message ^ - ')
+		console.log(' - - - - - - - - - - - - - - ')
+		console.log(' ')
+
+		const errBody = errObj.message
+		
+		console.log(' ')
+		console.log(' - - - - - - - ')
+		console.log('return (catch): ')
+		console.log(' ')
+
+		return {
+            statusCode: 500,
+            body: errBody
+        }
+	}
+};

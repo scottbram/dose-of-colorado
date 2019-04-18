@@ -20,4 +20,4 @@
 # both values - ordering from the browser doesn't matter.
 # /path/* param1=:value1 param2=:value2 /otherpath/:value1/:value2/:splat 301
 
-https://my.doseofcolorado.com/ mydocid=:mydocid 		https://doseofcolorado.com/my:mydocid 	301!
+https://my.doseofcolorado.com/* mydocid=:mydocid 		https://doseofcolorado.com/my:mydocid/:splat 	301!

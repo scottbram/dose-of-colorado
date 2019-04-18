@@ -90,7 +90,7 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 				var qStr_idx = location.href.indexOf('?');
 
-				console.log('qStr_idx: ' + qStr_idx);
+				// console.log('qStr_idx: ' + qStr_idx);
 
 				if (qStr_idx !== -1) {
 					history.pushState('', document.title, window.location.pathname);
@@ -124,115 +124,156 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 		 * For now, there is this...
 		 */
 
-		let mydoc_data = {
+		/*let mydoc_data = {
 			date: '2019-03-11',
 			lat: '40.1298',
 			long: '-105.5145',
-			ytCode: ''
-		};
+			videos: ''
+			photos: ''
+		};*/
 
 		/** Matching "alpha" is the dev placeholder for matching a valid ID */
-		if (mydoc_id_search_val === 'alpha') {
+		/*if (mydoc_id_search_val === 'alpha') {
 			mydoc_id_valid = true;
-		}
+		}*/
 
-		if (mydoc_id_valid) {
-			let mydoc_id = mydoc_id_search_val;
-
-			/** Set directly accessible URL */
-			history.pushState('', document.title, '?mydocid=' + mydoc_id);
+		$.ajax({
+			url: '/.netlify/functions/mydoc_at?mydocid=' + mydoc_id_search_val,
+		}).done( function (resp) {
+			
+			console.log(resp);
 
 			/** 
-			 * For image display/carousel, use naming convention, for example:
-			 * - alpha01.jpg, alpha02.jpg
-			 * or
-			 * - /alpha/01.jpg, /alpha/02.jpg
+			 * Matching "alpha" is the dev placeholder for matching a valid ID
+			 * until the Airtable API is functionaing as intended
+			 * (currently always returning 'alpha' data regardless of supplied id)
 			 */
 
-			/*if (ytCode.length > 0) {
-				let ytLink = 'https://youtube.com/watch?v=' + ytCode;
-			}*/
+			if (mydoc_id_search_val === 'alpha') {
+				mydoc_id_valid = true;
+			}
+			
+			if (mydoc_id_valid) {
+				let mydoc_id = mydoc_id_search_val;
 
-			let mydoc_lat = mydoc_data.lat;
-			let mydoc_long = mydoc_data.long;
-			let mydoc_loc_mb = [mydoc_long, mydoc_lat];
+				/** Set directly accessible URL */
+				history.pushState('', document.title, '?mydocid=' + mydoc_id);
 
-			let settings = {
-				center: mydoc_loc_mb,
-				zoom: 15
-			};
+				/** 
+				 * For image display/carousel, use naming convention, for example:
+				 * - alpha01.jpg, alpha02.jpg
+				 * or
+				 * - /alpha/01.jpg, /alpha/02.jpg
+				 */
 
-			let mydoc_map = mydoc.loadMap(settings);
+				let mydoc_data = resp;
+				let mydoc_collDate = mydoc_data.collection_date;
+				let mydoc_lat = mydoc_data.latitude;
+				let mydoc_long = mydoc_data.longitude;
+				let mydoc_loc_mb = [mydoc_long, mydoc_lat];
+				let videosArr = mydoc_data.videos;
+					videosArr = videosArr.split(',');
 
-			mydoc_map.on('load', function () {
+				$.each(videosArr, function (idx, itm) {
+					let vidSvc = itm.substr(0, itm.indexOf(':'));
 
-				console.log('findMyDoC mydoc_map.on(load)');
+					console.log('vidSvc: ' + vidSvc);
 
-				$('#mydoc_map_status').hide();
+					var vidId = itm.substr(itm.indexOf(':')+1, itm.length);
 
-				if ( $('#mydoc_map .alert').is(':visible') ) {
-					$('#mydoc_map .alert').removeAttr('style');
-				}
+					console.log('vidId: ' + vidId);
+					
+					var vidObj;
 
-				let mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
+					switch (vidSvc) {
+						case 'vimeo':
+							vidObj = '<iframe src="https://player.vimeo.com/video/' + vidId + '" class="video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+						break;
+						// case 'youtube':
+							// vidObj = ''; // 'https://youtube.com/watch?v=' + vidId;
+						// break;
+					}
 
-				var markerHeight = 38,
-					markerRadius = 8,
-					linearOffset = 10;
+					$('#mydoc_details_videos_container').append(vidObj);
+				});
 
-				var popupOffsets = {
-					'top': [0, 0],
-					'top-left': [0,0],
-					'top-right': [0,0],
-					'bottom': [0, -markerHeight],
-					'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-					'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-					'left': [markerRadius, (markerHeight - markerRadius) * -1],
-					'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+				let settings = {
+					center: mydoc_loc_mb,
+					zoom: 15
 				};
 
-				let mydoc_loc_str = mydoc_lat + ', ' + mydoc_long;
+				let mydoc_map = mydoc.loadMap(settings);
 
-				mydoc_map_popup_template = '<span class="mydoc_id">' + mydoc_id + '</span>'
-					+ '<br>'
-					+ mydoc_loc_str
-					+ '<br>'
-					+ '<a href="#mydoc_details">Details</a>'
-				;
+				mydoc_map.on('load', function () {
 
-				mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
-					.setLngLat([mydoc_long, mydoc_lat])
-					.setHTML(mydoc_map_popup_template)
-					.addTo(mydoc_map);
-			});
-		} else {
-			let mydoc_map = mydoc.loadMap();
+					// console.log('findMyDoC mydoc_map.on(load)');
 
-			mydoc_map.on('load', function () {
+					$('#mydoc_map_status').hide();
 
-				console.log('findMyDoC mydoc_map.on(load) - invalid id');
+					if ( $('#mydoc_map .alert').is(':visible') ) {
+						$('#mydoc_map .alert').removeAttr('style');
+					}
 
-				$('#mydoc_map_status').hide();
+					let mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
 
-				if ( $('#mydoc_map .alert').is(':visible') ) {
-					$('#mydoc_map .alert').removeAttr('style');
+					var markerHeight = 38,
+						markerRadius = 8,
+						linearOffset = 10;
+
+					var popupOffsets = {
+						'top': [0, 0],
+						'top-left': [0,0],
+						'top-right': [0,0],
+						'bottom': [0, -markerHeight],
+						'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+						'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+						'left': [markerRadius, (markerHeight - markerRadius) * -1],
+						'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+					};
+
+					let mydoc_loc_str = mydoc_lat + ', ' + mydoc_long;
+
+					mydoc_map_popup_template = '<span class="mydoc_id">' + mydoc_id + '</span>'
+						+ '<br>'
+						+ mydoc_loc_str
+						// + '<br>'
+						// + '<a href="#mydoc_details">Details</a>'
+					;
+
+					mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
+						.setLngLat([mydoc_long, mydoc_lat])
+						.setHTML(mydoc_map_popup_template)
+						.addTo(mydoc_map);
+				});
+			} else {
+				let mydoc_map = mydoc.loadMap();
+
+				mydoc_map.on('load', function () {
+
+					console.log('findMyDoC mydoc_map.on(load) - invalid id');
+
+					$('#mydoc_map_status').hide();
+
+					if ( $('#mydoc_map .alert').is(':visible') ) {
+						$('#mydoc_map .alert').removeAttr('style');
+					}
+				});
+
+				$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+
+				console.log( '$(#mydoc_map_status).is(:visible): ' +  $('#mydoc_map_status').is(':visible') );
+
+				if ( $('#mydoc_map_status').is(':visible') ) {
+					let mapStatus_h = $('#mydoc_map_status').outerHeight();
+
+					$('#mydoc_map .alert:first').css('margin-top', mapStatus_h + 16 + 'px');
 				}
-			});
 
-			$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-
-			console.log( '$(#mydoc_map_status).is(:visible): ' +  $('#mydoc_map_status').is(':visible') );
-
-			if ( $('#mydoc_map_status').is(':visible') ) {
-				let mapStatus_h = $('#mydoc_map_status').outerHeight();
-
-				$('#mydoc_map .alert:first').css('margin-top', mapStatus_h + 16 + 'px');
+				/** Autoclose the alerts */
+				/*window.setTimeout( function () {
+		            $('#mydoc_map .alert').alert('close');
+		        }, 4000);*/
 			}
-
-			/** Autoclose the alerts */
-			/*window.setTimeout( function () {
-	            $('#mydoc_map .alert').alert('close');
-	        }, 4000);*/
-		}
+		});
 	}
 }).init();
