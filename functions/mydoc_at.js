@@ -23,13 +23,13 @@ exports.handler = async (event, context) => {
 			})
 			.firstPage()
 
-		const respJson = resp[0].fields
+		// const respJson = resp.fields
 
 		if (typeof resp !== 'undefined') {
 			theGoods = {
 	            statusCode: 200,
 	            headers: { 'Content-Type': 'application/json' },
-	            body: JSON.stringify(respJson)
+	            body: JSON.stringify(resp)
 	        }
 		} else {
 			theGoods = {

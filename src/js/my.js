@@ -109,55 +109,60 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 		mydoc_id_search_val = mydoc_id_search_val.toLowerCase();
 
-		console.log('mydoc_id_search_val: ' + mydoc_id_search_val);
-
-		let mydoc_id_valid = false;
-
-		/** 
-		 * In an upcoming version, 
-		 * at this point a request is made 
-		 * to the myDoC datastore 
-		 * If a match is found, 
-		 * a success status is returned 
-		 * with the data in the response.
-		 *
-		 * For now, there is this...
-		 */
-
-		/*let mydoc_data = {
-			date: '2019-03-11',
-			lat: '40.1298',
-			long: '-105.5145',
-			videos: ''
-			photos: ''
-		};*/
-
-		/** Matching "alpha" is the dev placeholder for matching a valid ID */
-		/*if (mydoc_id_search_val === 'alpha') {
-			mydoc_id_valid = true;
-		}*/
+		// console.log('mydoc_id_search_val: ' + mydoc_id_search_val);
 
 		$.ajax({
 			url: '/.netlify/functions/mydoc_at?mydocid=' + mydoc_id_search_val,
 		}).done( function (resp) {
-			
-			console.log(resp);
-
 			/** 
-			 * Matching "alpha" is the dev placeholder for matching a valid ID
-			 * until the Airtable API is functionaing as intended
-			 * (currently always returning 'alpha' data regardless of supplied id)
+			 * Finding a match in the client-side is the solution until the Airtable API proxy function filters the match
 			 */
-
-			if (mydoc_id_search_val === 'alpha') {
-				mydoc_id_valid = true;
-			}
 			
+			var mydoc_id_valid = false,
+				mydoc_data;
+
+			$.each(resp, function (idx, itm) {
+				itm = itm.fields;
+
+				if (mydoc_id_search_val === itm.mydocid) {
+					mydoc_id_valid = true;
+					mydoc_data = itm;
+
+					return;
+				}
+
+				if (idx+1 === resp.length && !mydoc_id_valid) {
+					mappingErr('invalidMydoc');
+				}
+			});
+
 			if (mydoc_id_valid) {
 				let mydoc_id = mydoc_id_search_val;
 
 				/** Set directly accessible URL */
 				history.pushState('', document.title, '?mydocid=' + mydoc_id);
+
+				if (mydoc_data.videos) {
+					var videosArr = mydoc_data.videos;
+						videosArr = videosArr.split(',');
+
+					$.each(videosArr, function (idx, itm) {
+						let vidSvc = itm.substr(0, itm.indexOf(':'));
+						var vidId = itm.substr(itm.indexOf(':')+1, itm.length);
+						var vidObj;
+
+						switch (vidSvc) {
+							case 'vimeo':
+								vidObj = '<iframe src="https://player.vimeo.com/video/' + vidId + '" class="video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+							break;
+							// case 'youtube':
+								// vidObj = ''; // 'https://youtube.com/watch?v=' + vidId;
+							// break;
+						}
+
+						$('#mydoc_details_videos_container').append(vidObj);
+					});
+				}
 
 				/** 
 				 * For image display/carousel, use naming convention, for example:
@@ -166,36 +171,36 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 				 * - /alpha/01.jpg, /alpha/02.jpg
 				 */
 
-				let mydoc_data = resp;
-				let mydoc_collDate = mydoc_data.collection_date;
-				let mydoc_lat = mydoc_data.latitude;
-				let mydoc_long = mydoc_data.longitude;
+				if (mydoc_data.photos) {
+					var photosArr = mydoc_data.photos;
+						photosArr = photosArr.split(',');
+
+					/*$.each(photosArr, function (idx, itm) {
+						//
+					});*/
+				}
+
+				if (mydoc_data.collection_date) {
+					var mydoc_collDate = mydoc_data.collection_date;
+
+					// Do the date stuff
+				}
+
+				if (mydoc_data.latitude) {
+					var mydoc_lat = mydoc_data.latitude;
+				}
+
+				if (mydoc_data.longitude) {
+					var mydoc_long = mydoc_data.longitude;
+				}
+
+				if (!mydoc_data.latitude || !mydoc_data.longitude) {
+					mappingErr('missingCoors');
+
+					return;
+				}
+				
 				let mydoc_loc_mb = [mydoc_long, mydoc_lat];
-				let videosArr = mydoc_data.videos;
-					videosArr = videosArr.split(',');
-
-				$.each(videosArr, function (idx, itm) {
-					let vidSvc = itm.substr(0, itm.indexOf(':'));
-
-					console.log('vidSvc: ' + vidSvc);
-
-					var vidId = itm.substr(itm.indexOf(':')+1, itm.length);
-
-					console.log('vidId: ' + vidId);
-					
-					var vidObj;
-
-					switch (vidSvc) {
-						case 'vimeo':
-							vidObj = '<iframe src="https://player.vimeo.com/video/' + vidId + '" class="video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
-						break;
-						// case 'youtube':
-							// vidObj = ''; // 'https://youtube.com/watch?v=' + vidId;
-						// break;
-					}
-
-					$('#mydoc_details_videos_container').append(vidObj);
-				});
 
 				let settings = {
 					center: mydoc_loc_mb,
@@ -205,9 +210,6 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 				let mydoc_map = mydoc.loadMap(settings);
 
 				mydoc_map.on('load', function () {
-
-					// console.log('findMyDoC mydoc_map.on(load)');
-
 					$('#mydoc_map_status').hide();
 
 					if ( $('#mydoc_map .alert').is(':visible') ) {
@@ -245,7 +247,22 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 						.setHTML(mydoc_map_popup_template)
 						.addTo(mydoc_map);
 				});
-			} else {
+			}
+
+			function mappingErr (condition) {
+				var errMsg;
+
+				switch (condition) {
+					case 'invalidMydoc':
+						errMsg = '<strong>DoC id not found.</strong> Please try again.';
+					break;
+					case 'missingCoors':
+						errMsg = '<strong>Can\'t map this Dose ID.</strong> Seems to be from lack of coordinates. Sorry about that... =/';
+					break;
+					default:
+						errMsg = '<strong>Can\'t map this Dose ID.</strong> Looks like that\'s all the info there is. Sorry about that... =/';
+					break;
+				}
 				let mydoc_map = mydoc.loadMap();
 
 				mydoc_map.on('load', function () {
@@ -259,7 +276,7 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 					}
 				});
 
-				$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+				$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert">' + errMsg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
 
 				console.log( '$(#mydoc_map_status).is(:visible): ' +  $('#mydoc_map_status').is(':visible') );
 
