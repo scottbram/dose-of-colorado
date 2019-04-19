@@ -76,9 +76,6 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 	}
 	,
 	findMyDoC : function (source) {
-
-		console.log('findMyDoC...');
-
 		$('#mydoc_map .alert').alert('close');
 
 		let mydoc_id_search_val;
@@ -86,11 +83,9 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 		switch (source) {
 			case 'user':
 
-				console.log('...source: user');
+				console.log('source: user');
 
 				var qStr_idx = location.href.indexOf('?');
-
-				// console.log('qStr_idx: ' + qStr_idx);
 
 				if (qStr_idx !== -1) {
 					history.pushState('', document.title, window.location.pathname);
@@ -101,7 +96,7 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 			break;
 			case 'url':
 
-				console.log('...source: url');
+				console.log('source: url');
 
 				let mydoc_id_queryStr_val = $.urlParam('mydocid');
 				mydoc_id_search_val = mydoc_id_queryStr_val;
@@ -112,30 +107,14 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 		$.ajax({
 			url: '/.netlify/functions/mydoc_at?mydocid=' + mydoc_id_search_val,
 		}).done( function (resp) {
-			/** 
-			 * Finding a match in the client-side is the solution until the Airtable API proxy function filters the match
-			 */
-			
-			var mydoc_id_valid = false,
-				mydoc_data;
 
-			$.each(resp, function (idx, itm) {
-				itm = itm.fields;
+			console.log(resp);
 
-				if (mydoc_id_search_val === itm.mydocid) {
-					mydoc_id_valid = true;
-					mydoc_data = itm;
-
-					return;
-				}
-
-				if (idx+1 === resp.length && !mydoc_id_valid) {
-					mappingErr('invalidMydoc');
-				}
-			});
-
-			if (mydoc_id_valid) {
+			if (resp.length > 0) {
 				let mydoc_id = mydoc_id_search_val;
+				var mydoc_data = resp[0].fields;
+
+				console.log(mydoc_data);
 
 				/** Set directly accessible URL */
 				history.pushState('', document.title, '?mydocid=' + mydoc_id);
