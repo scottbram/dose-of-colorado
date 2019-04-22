@@ -8,8 +8,9 @@
 @import "globals/html";
 @import "globals/site";
 
-@import "globals/bstor";
-@import "globals/mapbox";
+@import "vendors/bootstrap-overrides";
+@import "vendors/mapbox-overrides";
+@import "vendors/vimeo-overrides";
 
 @import "components/buttons";
 

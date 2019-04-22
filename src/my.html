@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 		<title>DoC | My Dose of Colorado</title>
@@ -12,7 +13,7 @@
 	<body class="mydoc">
 		<header id="site_header">
 			<h1><a href="/my"><span>My</span> Dose <span>of</span> Colorado</a></h1>
-			<h2>Where was my DoC born? Find out here!</h2>
+			<h2>Learn more about your Dose!</h2>
 		</header>
 
 		<main>
@@ -32,29 +33,37 @@
 			<aside id="mydoc_details">
 				<header class="aside_header">
 					<h3>Dose Details</h3>
-					<a href="#">return to search</a>
+					<!-- <a href="#">return to search</a> -->
+					<a href="#" id="mydoc_details_search_pointTo" class="pointTo">search</a>
 				</header>
 
-				<dl>
+				<!-- <dl>
 					<dt>ID</dt>
 						<dd>alpha</dd>
 					<dt>Location</dt>
 						<dd>40.130, -105.514</dd>
 					<dt>Date collected</dt>
-						<dd>Mon 11 Mar 2019</dd>
-				</dl>
+						<dd id="mydoc_details_date"></dd>
+				</dl> -->
 
-				<section style="clear: both; opacity: 0.2; margin-bottom: 8px; height: 315px; background-color: silver;"></section>
+				<!-- <section style="clear: both; opacity: 0.2; margin-bottom: 8px; height: 160px; background-color: gray;"></section> -->
+				<!-- <iframe src="https://player.vimeo.com/video/330122314" width="640" height="564" frameborder="0" allow="fullscreen" allowfullscreen></iframe> -->
 
-				<section style="clear: both; opacity: 0.2; margin-bottom: 8px; height: 160px; background-color: gray;"></section>
+				<section id="mydoc_details_videos_container">
+					<!-- <iframe src="https://player.vimeo.com/video/330122314" class="video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> -->
+				</section>
 
-				<section style="clear: both; opacity: 0.05;">
+				<section id="mydoc_details_photos_container">
+					<div style="opacity: 0.2; height: 300px; background-color: silver;"></div>
+				</section>
+
+				<!-- <section style="clear: both; opacity: 0.05;">
 					<p>Section ideas</p>
 					<ul>
 						<li>Demo placeholder (e.g., alpha)?</li>
 						<li>Shop promo</li>
 					</ul>
-				</section>
+				</section> -->
 			</aside>
 		</main>
 

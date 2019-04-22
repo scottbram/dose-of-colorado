@@ -5,4 +5,19 @@
 # https://my.doseofcolorado.com 	https://doseofcolorado.com/my.html 	200!
 
 # redirect the request
-https://my.doseofcolorado.com 		https://doseofcolorado.com/my 	301!
+#https://my.doseofcolorado.com 		https://doseofcolorado.com/my 	301!
+
+# redirect the request with query string parameters
+# Examples 
+
+# base case
+# /path/* /otherpath/:splat 301​
+
+# one value or the other.  Must match exactly!
+# /path/* param1=:value1 /otherpath/:value1/:splat 301
+# /path/* param2=:value2 /otherpath/:value2/:splat 301​
+
+# both values - ordering from the browser doesn't matter.
+# /path/* param1=:value1 param2=:value2 /otherpath/:value1/:value2/:splat 301
+
+https://my.doseofcolorado.com/* mydocid=:mydocid 		https://doseofcolorado.com/my:mydocid/:splat 	301!

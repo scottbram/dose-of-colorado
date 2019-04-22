@@ -37,6 +37,11 @@ aside {
 	}
 }
 
+audio, canvas, progress, video {
+	display: inline-block;
+	vertical-align: baseline;
+}
+
 h1 {
 	margin: 0;
 	padding: 0;

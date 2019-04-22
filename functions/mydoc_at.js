@@ -1,56 +1,48 @@
-exports.handler = function (event, context, callback) {
-	const mydocid = event.queryStringParameters.mydocid
+const Airtable = require('airtable')
+const { AIRTABLE_API_KEY } = process.env
+const mydoc_data = new Airtable({
+		apiKey: AIRTABLE_API_KEY
+	})
+	.base('appyIApZ1WBML8Rmo')
 
-	console.log('mydocid: ' + mydocid);
+exports.handler = async (event, context) => {
+	const mydocid_query = event.queryStringParameters.mydocid
 
-	const { AIRTABLE_API_KEY } = process.env
-	
-	const Airtable = require('airtable')
+	try {
+		var theGoods,
+		// https://community.airtable.com/t/variable-in-filterbyformula/2251
+			filterFormula = "({mydocid} = '" + mydocid_query + "')";
 
-	console.log('Airtable: ');
+		const resp = await mydoc_data('mydoc_locations')
+			.select({
+				maxRecords: 100,
+				filterByFormula: filterFormula
+			})
+			.firstPage()
 
-	const base = new Airtable({
-			apiKey: AIRTABLE_API_KEY
-		})
-		.base('appyIApZ1WBML8Rmo');
+		if (typeof resp !== 'undefined') {
+			theGoods = {
+	            statusCode: 200,
+	            headers: { 'Content-Type': 'application/json' },
+	            body: JSON.stringify(resp)
+	        }
+		} else {
+			theGoods = {
+	            statusCode: 204,
+	            body: 'I got nada...'
+	        }
+		}
 
-	var builtBody;
-
-	base('mydoc_locations').select({
-	    filterByFormula: "NOT({mydocid} = '')",
-	    maxRecords: 10,
-	    view: "Grid view"
-	}).eachPage(function page(records, fetchNextPage) {
-	    // This function (`page`) will get called for each page of records.
-
-	    builtBody = JSON.stringify(records);
-
-	    /*records.forEach(function(record) {
-	    	let strRet = 'Retrieved:' + record.get('mydocid')
-	        
-	        console.log(strRet);
-
-	    });*/
-
-	    // To fetch the next page of records, call `fetchNextPage`.
-	    // If there are more records, `page` will get called again.
-	    // If there are no more records, `done` will get called.
-	    fetchNextPage();
-
-	}, function done(err) {
-	    if (err) { console.error(err); return; }
-
-	    callback(null, {
-			statusCode: 200,
-			body: builtBody
-		});
-	});
-}
-
-/*exports.handler = function (event, context, callback) {
-// exports.handler = async (event, context) => {
-
-	console.log('context: ');
-	console.log(context);
-
-}*/
+		return theGoods
+	} catch (errObj) {
+		const errBody = {
+			'err_msg': errObj.message
+		}
+		
+		return {
+            statusCode: 500,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(errBody)
+        }
+	}
+};

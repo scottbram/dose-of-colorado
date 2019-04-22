@@ -76,9 +76,6 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 	}
 	,
 	findMyDoC : function (source) {
-
-		console.log('findMyDoC...');
-
 		$('#mydoc_map .alert').alert('close');
 
 		let mydoc_id_search_val;
@@ -86,11 +83,9 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 		switch (source) {
 			case 'user':
 
-				console.log('...source: user');
+				console.log('source: user');
 
 				var qStr_idx = location.href.indexOf('?');
-
-				console.log('qStr_idx: ' + qStr_idx);
 
 				if (qStr_idx !== -1) {
 					history.pushState('', document.title, window.location.pathname);
@@ -101,7 +96,7 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 			break;
 			case 'url':
 
-				console.log('...source: url');
+				console.log('source: url');
 
 				let mydoc_id_queryStr_val = $.urlParam('mydocid');
 				mydoc_id_search_val = mydoc_id_queryStr_val;
@@ -109,130 +104,170 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 		mydoc_id_search_val = mydoc_id_search_val.toLowerCase();
 
-		console.log('mydoc_id_search_val: ' + mydoc_id_search_val);
+		$.ajax({
+			url: '/.netlify/functions/mydoc_at?mydocid=' + mydoc_id_search_val,
+		}).done( function (resp) {
 
-		let mydoc_id_valid = false;
+			console.log(resp);
 
-		/** 
-		 * In an upcoming version, 
-		 * at this point a request is made 
-		 * to the myDoC datastore 
-		 * If a match is found, 
-		 * a success status is returned 
-		 * with the data in the response.
-		 *
-		 * For now, there is this...
-		 */
+			if (resp.length > 0) {
+				let mydoc_id = mydoc_id_search_val;
+				var mydoc_data = resp[0].fields;
 
-		let mydoc_data = {
-			date: '2019-03-11',
-			lat: '40.1298',
-			long: '-105.5145',
-			ytCode: ''
-		};
+				console.log(mydoc_data);
 
-		/** Matching "alpha" is the dev placeholder for matching a valid ID */
-		if (mydoc_id_search_val === 'alpha') {
-			mydoc_id_valid = true;
-		}
+				/** Set directly accessible URL */
+				history.pushState('', document.title, '?mydocid=' + mydoc_id);
 
-		if (mydoc_id_valid) {
-			let mydoc_id = mydoc_id_search_val;
+				if (mydoc_data.videos) {
+					var videosArr = mydoc_data.videos;
+						videosArr = videosArr.split(',');
 
-			/** Set directly accessible URL */
-			history.pushState('', document.title, '?mydocid=' + mydoc_id);
+					$.each(videosArr, function (idx, itm) {
+						let vidSvc = itm.substr(0, itm.indexOf(':'));
+						var vidId = itm.substr(itm.indexOf(':')+1, itm.length);
+						var vidObj;
 
-			/** 
-			 * For image display/carousel, use naming convention, for example:
-			 * - alpha01.jpg, alpha02.jpg
-			 * or
-			 * - /alpha/01.jpg, /alpha/02.jpg
-			 */
+						switch (vidSvc) {
+							case 'vimeo':
+								vidObj = '<iframe src="https://player.vimeo.com/video/' + vidId + '" class="video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+							break;
+							// case 'youtube':
+								// vidObj = ''; // 'https://youtube.com/watch?v=' + vidId;
+							// break;
+						}
 
-			/*if (ytCode.length > 0) {
-				let ytLink = 'https://youtube.com/watch?v=' + ytCode;
-			}*/
-
-			let mydoc_lat = mydoc_data.lat;
-			let mydoc_long = mydoc_data.long;
-			let mydoc_loc_mb = [mydoc_long, mydoc_lat];
-
-			let settings = {
-				center: mydoc_loc_mb,
-				zoom: 15
-			};
-
-			let mydoc_map = mydoc.loadMap(settings);
-
-			mydoc_map.on('load', function () {
-
-				console.log('findMyDoC mydoc_map.on(load)');
-
-				$('#mydoc_map_status').hide();
-
-				if ( $('#mydoc_map .alert').is(':visible') ) {
-					$('#mydoc_map .alert').removeAttr('style');
+						$('#mydoc_details_videos_container').append(vidObj);
+					});
 				}
 
-				let mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
+				/** 
+				 * For image display/carousel, use naming convention, for example:
+				 * - alpha01.jpg, alpha02.jpg
+				 * or
+				 * - /alpha/01.jpg, /alpha/02.jpg
+				 */
 
-				var markerHeight = 38,
-					markerRadius = 8,
-					linearOffset = 10;
+				if (mydoc_data.photos) {
+					var photosArr = mydoc_data.photos;
+						photosArr = photosArr.split(',');
 
-				var popupOffsets = {
-					'top': [0, 0],
-					'top-left': [0,0],
-					'top-right': [0,0],
-					'bottom': [0, -markerHeight],
-					'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-					'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-					'left': [markerRadius, (markerHeight - markerRadius) * -1],
-					'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+					/*$.each(photosArr, function (idx, itm) {
+						//
+					});*/
+				}
+
+				if (mydoc_data.collection_date) {
+					var mydoc_collDate = mydoc_data.collection_date;
+
+					// Do the date stuff
+				}
+
+				if (mydoc_data.latitude) {
+					var mydoc_lat = mydoc_data.latitude;
+				}
+
+				if (mydoc_data.longitude) {
+					var mydoc_long = mydoc_data.longitude;
+				}
+
+				if (!mydoc_data.latitude || !mydoc_data.longitude) {
+					mappingErr('missingCoors');
+
+					return;
+				}
+				
+				let mydoc_loc_mb = [mydoc_long, mydoc_lat];
+
+				let settings = {
+					center: mydoc_loc_mb,
+					zoom: 15
 				};
 
-				let mydoc_loc_str = mydoc_lat + ', ' + mydoc_long;
+				let mydoc_map = mydoc.loadMap(settings);
 
-				mydoc_map_popup_template = '<span class="mydoc_id">' + mydoc_id + '</span>'
-					+ '<br>'
-					+ mydoc_loc_str
-					+ '<br>'
-					+ '<a href="#mydoc_details">Details</a>'
-				;
+				mydoc_map.on('load', function () {
+					$('#mydoc_map_status').hide();
 
-				mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
-					.setLngLat([mydoc_long, mydoc_lat])
-					.setHTML(mydoc_map_popup_template)
-					.addTo(mydoc_map);
-			});
-		} else {
-			let mydoc_map = mydoc.loadMap();
+					if ( $('#mydoc_map .alert').is(':visible') ) {
+						$('#mydoc_map .alert').removeAttr('style');
+					}
 
-			mydoc_map.on('load', function () {
+					let mydoc_marker = new mapboxgl.Marker().setLngLat(mydoc_loc_mb).addTo(mydoc_map);
 
-				console.log('findMyDoC mydoc_map.on(load) - invalid id');
+					var markerHeight = 38,
+						markerRadius = 8,
+						linearOffset = 10;
 
-				$('#mydoc_map_status').hide();
+					var popupOffsets = {
+						'top': [0, 0],
+						'top-left': [0,0],
+						'top-right': [0,0],
+						'bottom': [0, -markerHeight],
+						'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+						'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+						'left': [markerRadius, (markerHeight - markerRadius) * -1],
+						'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+					};
 
-				if ( $('#mydoc_map .alert').is(':visible') ) {
-					$('#mydoc_map .alert').removeAttr('style');
-				}
-			});
+					let mydoc_loc_str = mydoc_lat + ', ' + mydoc_long;
 
-			$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>DoC id not found.</strong> Please try again.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+					mydoc_map_popup_template = '<span class="mydoc_id">' + mydoc_id + '</span>'
+						+ '<br>'
+						+ mydoc_loc_str
+						// + '<br>'
+						// + '<a href="#mydoc_details">Details</a>'
+					;
 
-			console.log( '$(#mydoc_map_status).is(:visible): ' +  $('#mydoc_map_status').is(':visible') );
-
-			if ( $('#mydoc_map_status').is(':visible') ) {
-				let mapStatus_h = $('#mydoc_map_status').outerHeight();
-
-				$('#mydoc_map .alert:first').css('margin-top', mapStatus_h + 16 + 'px');
+					mydoc_map_popup = new mapboxgl.Popup({offset: popupOffsets, className: 'mydoc-map-popup'})
+						.setLngLat([mydoc_long, mydoc_lat])
+						.setHTML(mydoc_map_popup_template)
+						.addTo(mydoc_map);
+				});
 			}
 
-			/** Autoclose the alerts */
-			/*window.setTimeout( function () {
-	            $('#mydoc_map .alert').alert('close');
-	        }, 4000);*/
-		}
+			function mappingErr (condition) {
+				var errMsg;
+
+				switch (condition) {
+					case 'invalidMydoc':
+						errMsg = '<strong>DoC id not found.</strong> Please try again.';
+					break;
+					case 'missingCoors':
+						errMsg = '<strong>Can\'t map this Dose ID.</strong> Seems to be from lack of coordinates. Sorry about that... =/';
+					break;
+					default:
+						errMsg = '<strong>Can\'t map this Dose ID.</strong> Looks like that\'s all the info there is. Sorry about that... =/';
+					break;
+				}
+				let mydoc_map = mydoc.loadMap();
+
+				mydoc_map.on('load', function () {
+
+					console.log('findMyDoC mydoc_map.on(load) - invalid id');
+
+					$('#mydoc_map_status').hide();
+
+					if ( $('#mydoc_map .alert').is(':visible') ) {
+						$('#mydoc_map .alert').removeAttr('style');
+					}
+				});
+
+				$('#mydoc_map').append('<div class="alert alert-danger alert-dismissible fade show" role="alert">' + errMsg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+
+				console.log( '$(#mydoc_map_status).is(:visible): ' +  $('#mydoc_map_status').is(':visible') );
+
+				if ( $('#mydoc_map_status').is(':visible') ) {
+					let mapStatus_h = $('#mydoc_map_status').outerHeight();
+
+					$('#mydoc_map .alert:first').css('margin-top', mapStatus_h + 16 + 'px');
+				}
+
+				/** Autoclose the alerts */
+				/*window.setTimeout( function () {
+		            $('#mydoc_map .alert').alert('close');
+		        }, 4000);*/
+			}
+		});
 	}
 }).init();
