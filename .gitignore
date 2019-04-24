@@ -1,3 +1,5 @@
 node_modules/
-gulpfile.txt
+.circleci/
 IP assets/
+netlify.toml
+gulpfile.txt
