@@ -31,14 +31,15 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 			if (mydoc_id_search_val.length > 4) {
 				$('#mydoc_id_search_go').prop('disabled', false);
+				$('#mydoc_id_search_field').off('keypress');
+				$('#mydoc_id_search_field').keypress( function (e) {
+					if (e.which === 13) {
+						mydoc.findMyDoC('user');
+					}
+				});
 			} else {
 				$('#mydoc_id_search_go').prop('disabled', true);
-			}
-		});
-
-		$('#mydoc_id_search_field').keypress( function (e) {
-			if (e.which === 13) {
-				mydoc.findMyDoC('user');
+				$('#mydoc_id_search_field').off('keypress');
 			}
 		});
 
@@ -106,8 +107,10 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 		$.ajax({
 			url: '/.netlify/functions/mydoc_at?mydocid=' + mydoc_id_search_val,
+			dataType: 'json'
 		}).done( function (resp) {
 
+			console.log('resp: ');
 			console.log(resp);
 
 			if (resp.length > 0) {
@@ -139,6 +142,8 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 						$('#mydoc_details_videos_container').append(vidObj);
 					});
+				} else {
+					$('#mydoc_details_videos_container').html('');
 				}
 
 				/** 
@@ -224,6 +229,8 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 						.setHTML(mydoc_map_popup_template)
 						.addTo(mydoc_map);
 				});
+			} else {
+				mappingErr('invalidMydoc');
 			}
 
 			function mappingErr (condition) {
