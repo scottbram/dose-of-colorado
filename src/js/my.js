@@ -157,9 +157,13 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 					var photosArr = mydoc_data.photos;
 						photosArr = photosArr.split(',');
 
+						$('#mydoc_details_photos_carousel').css('visibility', 'visible');
+
 					/*$.each(photosArr, function (idx, itm) {
 						//
 					});*/
+				} else {
+					$('#mydoc_details_photos_carousel').css('visibility', 'hidden');
 				}
 
 				if (mydoc_data.collection_date) {
