@@ -29,6 +29,6 @@
     "node-fetch": "^2.3.0"
   },
   "dependencies": {
-    "airtable": "^0.5.10"
+    "airtable": "^0.7.2"
   }
 }
