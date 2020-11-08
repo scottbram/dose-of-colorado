@@ -6,10 +6,12 @@ This is a place to get your own small dose of the Rocky Mountains. Yes, you can 
 
 ### But wait, there's more!
 
-Not only can you have your dose, you can learn more about it too! Just go to https://my.doseofcolorado.com and enter your myDocC ID to see:
+Not only can you have your dose, you can learn more about it too! Just go to https://my.doseofcolorado.com and enter your myDoC ID to see:
 - The exact date, time, and position on Earth where your dose was collected
 - Photos & video of the location
 - Notable notes about the collection of your dose
+
+*Note: use myDoC ID "alpha" to see a demo*
 
 ## For the code peeps
 
