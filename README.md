@@ -11,7 +11,7 @@ Not only can you have your dose, you can learn more about it too! Just go to htt
 - Photos & video of the location
 - Notable notes about the collection of your dose
 
-*Note: use myDoC ID "alpha" to see a demo*
+*Note: use myDoC ID "alpha" to see a demo or [use this link](https://doseofcolorado.com/my?mydocid=alpha)*
 
 ## For the code peeps
 
