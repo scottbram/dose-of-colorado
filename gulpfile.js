@@ -86,13 +86,13 @@ gulp.task('imagemin', function () {
 		.pipe(gulp.dest(output.images));
 });
 
-/** Copy _redirect file */
+/** Copy _redirect file for subdomains */
 gulp.task('copy_redir', function () {
 	return gulp.src(in_root + '/_redirects')
 		.pipe(gulp.dest(out_root));
 });
 
-/** Copy video files to output directory */
+/** Copy _redirect file for subdomains */
 gulp.task('copy_videos', function () {
 	return gulp.src(in_root + '/assets/videos/**/*')
 		.pipe(gulp.dest(out_root + '/assets/videos'));

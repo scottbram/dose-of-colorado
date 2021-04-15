@@ -114,8 +114,6 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 			console.log(resp);
 
 			if (resp.length > 0) {
-				$('#mydoc_details').css('visibility', 'visible');
-
 				let mydoc_id = mydoc_id_search_val;
 				var mydoc_data = resp[0].fields;
 
@@ -155,20 +153,17 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 				 * - /alpha/01.jpg, /alpha/02.jpg
 				 */
 
-				console.log('mydoc_data.photos: ');
-				console.log(mydoc_data.photos);
-				
 				if (mydoc_data.photos) {
 					var photosArr = mydoc_data.photos;
 						photosArr = photosArr.split(',');
 
-						$('#mydoc_details_photos_container').css('visibility', 'visible');
+						$('#mydoc_details_photos_carousel').css('visibility', 'visible');
 
 					/*$.each(photosArr, function (idx, itm) {
 						//
 					});*/
 				} else {
-					$('#mydoc_details_photos_container').css('visibility', 'hidden');
+					$('#mydoc_details_photos_carousel').css('visibility', 'hidden');
 				}
 
 				if (mydoc_data.collection_date) {
@@ -247,8 +242,6 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 
 				switch (condition) {
 					case 'invalidMydoc':
-						$('#mydoc_details, #mydoc_details > section').css('visibility', 'hidden');
-
 						errMsg = '<strong>DoC id not found.</strong> Please try again.';
 					break;
 					case 'missingCoors':
