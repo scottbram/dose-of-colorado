@@ -1,32 +1,37 @@
-const gulp 		= require('gulp'),
-	
-	/** Plug-ins */
+'use strict';
+const gulp 		= require('gulp');
+
+/** Plug-ins */
+const 
 	// concat 		= require('gulp-concat'),
 	htmlmin 	= require('gulp-htmlmin'),
 	rename 		= require('gulp-rename'),
-	sass 		= require('gulp-sass'),
+	// sass 		= require('gulp-sass'),
+	sass 		= require('gulp-sass')(require('sass')),
 	sourcemaps 	= require('gulp-sourcemaps'),
 	terser 		= require('gulp-terser'),
-	imagemin 	= require('gulp-imagemin'),
-	
-	/** Paths */
-	in_root		= 'src',
-	out_root	= 'dist',
+	imagemin 	= require('gulp-imagemin')
+;
 
-	input = {
-		'html': in_root + '/**/*.html',
-	 	'styles': in_root + '/styles/**/*.scss',
-		'js': in_root + '/js/**/*.js',
-		'images': in_root + '/assets/**/*',
-		// 'redir': in_root + '/_redirects'
-	},
-	output = {
-		'html': out_root,
-		'styles': out_root + '/styles',
-		'js': out_root + '/js',
-		'images': out_root + '/assets',
-		// 'redir': out_root
-	};
+/** Paths */
+const in_root	= 'src';
+const out_root	= 'dist';
+
+const input = {
+	'html': in_root + '/**/*.html',
+	'styles': in_root + '/styles/**/*.scss',
+	'js': in_root + '/js/**/*.js',
+	'images': in_root + '/assets/**/*',
+	// 'redir': in_root + '/_redirects'
+};
+
+const output = {
+	'html': out_root,
+	'styles': out_root + '/styles',
+	'js': out_root + '/js',
+	'images': out_root + '/assets',
+	// 'redir': out_root
+};
 
 /** Process HTML files */
 gulp.task('build-html', function () {
@@ -78,7 +83,7 @@ gulp.task('imagemin', function () {
 	return gulp.src(input.images)
 		.pipe(imagemin(
 			[
-				imagemin.jpegtran({
+				imagemin.mozjpeg({
 					progressive: true
 				})
 			]
