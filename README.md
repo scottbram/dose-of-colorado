@@ -2,7 +2,7 @@
 
 ## What is Dose of Colorado?
 
-This is a place to get your own small dose of the Rocky Mountains. Yes, you can literally get a small piece of Colorado to have as your very own, to do with as you please.  
+This is a place to get your own small dose of the Rocky Mountains. Yes, you can literally get a (very) small piece of Colorado to have as your very own!
 
 ### But wait, there's more!
 
