@@ -1,7 +1,7 @@
 const Airtable = require('airtable')
 const { AIRTABLE_API_KEY } = process.env
 const mydoc_data = new Airtable({
-		apiKey: AIRTABLE_API_KEY
+		apiKey: AIRTABLE_PAT
 	})
 	.base('appyIApZ1WBML8Rmo')
 
