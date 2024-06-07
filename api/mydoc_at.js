@@ -20,11 +20,14 @@ const handler = async (req, res) => {
 			})
 			.firstPage()
 
+		console.log(resp);
+
 		if (typeof resp !== 'undefined') {
 			res = {
 	            statusCode: 200,
 	            headers: { 'Content-Type': 'application/json' },
-	            body: JSON.stringify(resp)
+	            // body: JSON.stringify(resp)
+				json: resp
 	        }
 		} else {
 			res = {
