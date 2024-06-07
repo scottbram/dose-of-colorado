@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
 		}
 		
 		return {
-            statusCode: 500,
+            statusCode: errObj.statusCode,
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(errBody)
         }
