@@ -6,7 +6,7 @@ const mydoc_data = new Airtable({
 	.base('appyIApZ1WBML8Rmo')
 
 const handler = async (req, res) => {
-	const mydocid_query = req.queryStringParameters.mydocid
+	const mydocid_query = req.query.mydocid
 
 	try {
 		var theGoods,
