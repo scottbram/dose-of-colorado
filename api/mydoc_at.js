@@ -23,20 +23,19 @@ const handler = async (req, res) => {
 		console.log(resp);
 
 		if (typeof resp !== 'undefined') {
-			res = {
+			theGoods = {
 	            statusCode: 200,
 	            headers: { 'Content-Type': 'application/json' },
-	            // body: JSON.stringify(resp)
-				json: resp
+	            body: JSON.stringify(resp)
 	        }
 		} else {
-			res = {
+			theGoods = {
 	            statusCode: 204,
 	            body: 'I got nada...'
 	        }
 		}
 
-		return res
+		res.send(theGoods)
 	} catch (errObj) {
 		const errBody = {
 			'err_msg': errObj.message
