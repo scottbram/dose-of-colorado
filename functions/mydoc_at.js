@@ -1,6 +1,7 @@
 const Airtable = require('airtable')
 const { AIRTABLE_PAT } = process.env
 const mydoc_data = new Airtable({
+		endpointUrl: 'https://api.airtable.com',
 		apiKey: AIRTABLE_PAT
 	})
 	.base('appyIApZ1WBML8Rmo')
