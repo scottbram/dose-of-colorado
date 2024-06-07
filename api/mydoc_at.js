@@ -5,13 +5,13 @@ const mydoc_data = new Airtable({
 	})
 	.base('appyIApZ1WBML8Rmo')
 
-exports.handler = async (event, context) => {
-	const mydocid_query = event.queryStringParameters.mydocid
+const handler = async (req, res) => {
+	const mydocid_query = req.queryStringParameters.mydocid
 
 	try {
 		var theGoods,
 		// https://community.airtable.com/t/variable-in-filterbyformula/2251
-			filterFormula = "({mydocid} = '" + mydocid_query + "')";
+		filterFormula = "({mydocid} = '" + mydocid_query + "')";
 
 		const resp = await mydoc_data('mydoc_locations')
 			.select({
@@ -46,3 +46,5 @@ exports.handler = async (event, context) => {
         }
 	}
 };
+
+module.exports = handler
