@@ -20,8 +20,6 @@ const handler = async (req, res) => {
 			})
 			.firstPage()
 
-		console.log(resp);
-
 		if (typeof resp !== 'undefined') {
 			res.status(200).setHeader('Content-Type', 'application/json').json(resp)
 		} else {
