@@ -21,19 +21,19 @@ const handler = async (req, res) => {
 			.firstPage()
 
 		if (typeof resp !== 'undefined') {
-			theGoods = {
+			res = {
 	            statusCode: 200,
 	            headers: { 'Content-Type': 'application/json' },
 	            body: JSON.stringify(resp)
 	        }
 		} else {
-			theGoods = {
+			res = {
 	            statusCode: 204,
 	            body: 'I got nada...'
 	        }
 		}
 
-		return theGoods
+		return res
 	} catch (errObj) {
 		const errBody = {
 			'err_msg': errObj.message
