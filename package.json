@@ -1,35 +1,35 @@
 {
-  "name": "dose-of-colorado",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.html",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thatbram/dose-of-colorado.git"
-  },
-  "author": "Scott Bram <scottbram@gmail.com>",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/thatbram/dose-of-colorado/issues"
-  },
-  "homepage": "https://github.com/thatbram/dose-of-colorado#readme",
-  "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-imagemin": "^7.1.0",
-    "gulp-rename": "^1.4.0",
-    "gulp-sass": "^5.1.0",
-    "gulp-sourcemaps": "^2.6.5",
-    "gulp-terser": "^1.1.7",
-    "netlify-lambda": "^1.4.5",
-    "node-fetch": "^3.2.10"
-  },
-  "dependencies": {
-    "airtable": "^0.12.2",
-    "sass": "^1.56.2"
-  }
+    "name": "dose-of-colorado",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/thatbram/dose-of-colorado.git"
+    },
+    "author": "Scott Bram <scottbram@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/thatbram/dose-of-colorado/issues"
+    },
+    "homepage": "https://github.com/thatbram/dose-of-colorado#readme",
+    "devDependencies": {
+        "gulp": "^4.0.2",
+        "gulp-concat": "^2.6.1",
+        "gulp-htmlmin": "^5.0.1",
+        "gulp-imagemin": "^7.1.0",
+        "gulp-rename": "^1.4.0",
+        "gulp-sass": "^5.1.0",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-terser": "^1.1.7",
+        "vercel": "^19.1.1",
+        "node-fetch": "^3.2.10"
+    },
+    "dependencies": {
+        "airtable": "^0.12.2",
+        "sass": "^1.56.2"
+    }
 }
