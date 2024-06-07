@@ -105,7 +105,8 @@ var mydoc = ( typeof (mydoc) === 'object' ) ? mydoc : {};
 		mydoc_id_search_val = mydoc_id_search_val.toLowerCase();
 
 		$.ajax({
-			url: '/.netlify/functions/mydoc_at?mydocid=' + mydoc_id_search_val,
+			// url: '/.netlify/functions/mydoc_at?mydocid=' + mydoc_id_search_val,
+			url: '/api/mydoc_at?mydocid=' + mydoc_id_search_val,
 			dataType: 'json'
 		}).done( function (resp) {
 
