@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.html",
+    "engines": {
+        "node": "24.x"
+    },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -25,11 +28,11 @@
         "gulp-sass": "^5.1.0",
         "gulp-sourcemaps": "^2.6.5",
         "gulp-terser": "^1.1.7",
-        "vercel": "^19.1.1",
-        "node-fetch": "^3.2.10"
+        "vercel": "^33.0.0",
+        "node-fetch": "^3.3.2"
     },
     "dependencies": {
-        "airtable": "^0.12.2",
-        "sass": "^1.56.2"
+        "airtable": "^5.1.0",
+        "sass": "^1.70.0"
     }
 }

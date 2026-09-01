@@ -1,4 +1,12 @@
 {
+    "functions": {
+        "api/**": {
+            "runtime": "nodejs24.x"
+        },
+        "functions/**": {
+            "runtime": "nodejs24.x"
+        }
+    },
     "rewrites": [
         {
             "source": "/my",
