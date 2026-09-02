@@ -2,9 +2,6 @@
     "functions": {
         "api/**": {
             "runtime": "@vercel/node@3.1.0"
-        },
-        "functions/**": {
-            "runtime": "@vercel/node@3.1.0"
         }
     },
     "env": {
