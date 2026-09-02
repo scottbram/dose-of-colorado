@@ -1,4 +1,4 @@
 {
-  "functions": { "api/**": { "runtime": "nodejs24.x" } },
+  "functions": { "api/**": {} },
   "rewrites": [{ "source": "/my", "destination": "/my.html" }]
 }
