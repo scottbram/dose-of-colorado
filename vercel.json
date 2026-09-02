@@ -1,16 +1,4 @@
 {
-    "functions": {
-        "api/**": {
-            "runtime": "@vercel/node@3.1.0"
-        }
-    },
-    "env": {
-        "NODE_OPTIONS": "--experimental-fetch"
-    },
-    "rewrites": [
-        {
-            "source": "/my",
-            "destination": "/my.html"
-        }
-    ]
+  "functions": { "api/**": { "runtime": "nodejs24.x" } },
+  "rewrites": [{ "source": "/my", "destination": "/my.html" }]
 }
