@@ -32,7 +32,7 @@
         "node-fetch": "^3.3.2"
     },
     "dependencies": {
-        "airtable": "^5.1.0",
+        "airtable": "^0.12.2",
         "sass": "^1.70.0"
     }
 }
